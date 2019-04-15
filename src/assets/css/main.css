@@ -1,0 +1,16 @@
+.main {
+    height: 89vh;
+}
+.bg-image {
+    background-image: url(../img/bg-init.jpg);
+    background-position: right;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.fz-bold {
+    font-weight: bold;
+}
+.fz-20 {
+    font-size: 20px;
+}
