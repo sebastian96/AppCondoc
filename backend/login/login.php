@@ -19,6 +19,7 @@
         $respuesta = Array(
             "nombre" => $result->nombre,
             "apellido" => $result->apellido,
+            "user" => $result->ususario,
             "estado" => "success"
         );
     } else {

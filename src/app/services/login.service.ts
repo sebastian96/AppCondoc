@@ -5,6 +5,7 @@ interface responseJson
 {
   nombre?: string,
   apellido?: string,
+  usuario?: string,
   estado?: string 
 }
 @Injectable({

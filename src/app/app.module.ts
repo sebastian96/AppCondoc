@@ -15,7 +15,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     HomeComponent,
     HeaderComponent,
     LoginComponent,
-    AdminComponent
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
