@@ -6,19 +6,22 @@ import { HomeComponent } from './pages/home/home.component';
 import { HeaderComponent } from 'src/shared/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FormsModule }   from '@angular/forms';
-
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AdminComponent } from './pages/admin/admin.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
