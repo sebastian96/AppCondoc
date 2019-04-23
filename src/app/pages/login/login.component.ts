@@ -40,18 +40,11 @@ export class LoginComponent implements OnInit {
             this.apiLogin.login('login/login.php', data).subscribe(
                 response => {
                     let res = response;
-                    if(res.estado == 'success') {
-                        Swal.fire({
-                            title: "Bienvenido",
-                            text: res.nombre + " " + res.apellido,
-                            type: "success",
-                            animation: false,
-                            showConfirmButton: false,
-                            timer: 1000,
-                            customClass: {
-                                popup: "animated bounceIn"
-                            }
-                        });
+                    let token = this.apiLogin.decode(res);
+                    
+                    if(token.estado == 'success') {
+                        sessionStorage.setItem('user', token.user);
+                        sessionStorage.setItem('token', JSON.stringify(res));
                         this.router.navigate(['inicio']);
                     }else {
                         Swal.fire({
@@ -71,4 +64,5 @@ export class LoginComponent implements OnInit {
             )
         }
     }
+
 }

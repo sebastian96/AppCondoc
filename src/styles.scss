@@ -1,12 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 .main {
     height: 89vh;
 }
 .bg-image {
-    background-image: url(assets/img/bg-init.jpg);
-    background-position: right;
-	background-repeat: no-repeat;
-	background-size: cover;
+    position: absolute;
+	vertical-align: top;
+	width: 100vw;
+	height: 100vh;
+	opacity: 0.9;
+	filter: blur(4px);
 }
 
 .fz-bold {

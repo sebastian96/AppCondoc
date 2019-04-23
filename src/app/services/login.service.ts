@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import decode  from "jwt-decode";
+import { log } from 'util';
 
 interface responseJson 
 {
@@ -13,7 +15,7 @@ interface responseJson
 })
 export class LoginService {
 
-    public back_url = "http://localhost/AppCondoc/backend/";
+    public back_url = "http://localhost/backend/";
 
     constructor(private http: HttpClient) { }
 
@@ -21,4 +23,9 @@ export class LoginService {
         let resp = this.http.post<responseJson>(this.back_url.concat(ruta), data);
         return resp;
     }
+
+    decode(token){
+        return decode(token);
+    }
+
 }
