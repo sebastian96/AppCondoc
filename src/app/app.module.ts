@@ -8,6 +8,8 @@ import { LoginComponent } from './pages/login/login.component';
 import { FormsModule }   from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './pages/admin/admin.component';
+import { LoginService } from './services/login/login.service';
+import { SessionGuard } from './services/guards/session.guard';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,7 @@ import { AdminComponent } from './pages/admin/admin.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [LoginService, SessionGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

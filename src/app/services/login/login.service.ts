@@ -15,7 +15,7 @@ interface responseJson
 })
 export class LoginService {
 
-    public back_url = "http://localhost/AppCondoc/backEnd";
+    public back_url = "http://localhost/AppCondoc/backEnd/";
 
     constructor(private http: HttpClient) { }
 

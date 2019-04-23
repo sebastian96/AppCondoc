@@ -1,17 +1,17 @@
-<div class="animated fadeIn row main">
+<div class="animated fadeIn row main ml-0">
     <img src="../../../assets/img/bg-init.jpg" alt="background-image" class="bg-image">
     <div class="align-items-center container d-flex">
         <div class="col-sm-6 mt-4 offset-sm-3 box-login">
             <form #f="ngForm" (ngSubmit)="ingresar(f)" novalidate>
-                <div class="form-group">
-                    <label class="text-dark fz-20 fz-bold" for="name">Usuario o correo</label>
-                    <input type="text" class="form-control" placeholder="Usuario o correo" id="user" name="user" [(ngModel)]="user.username">
+                <div class="form-group rubberBand animated">
+                    <label class="text-dark fz-20 fz-bold" for="user">Usuario o correo</label>
+                    <input type="text" class="form-control login" placeholder="Usuario o correo" id="user" name="user" [(ngModel)]="user.username" autofocus>
                 </div>
-                <div class="form-group">
+                <div class="form-group rubberBand animated">
                     <label class="text-dark fz-20 fz-bold" for="password">Contraseña</label>
-                    <input type="password" class="form-control" placeholder="Contaseña" id="password" name="password" [(ngModel)]="user.password">
+                    <input type="password" class="form-control login" placeholder="Contaseña" id="password" name="password" [(ngModel)]="user.password">
                 </div>
-                <div class="form-group mt-3">
+                <div class="form-group rubberBand animated mt-3">
                     <input type="submit" class="btn btn-block btn-primary m-0" value="Ingresar">
                 </div>
             </form>

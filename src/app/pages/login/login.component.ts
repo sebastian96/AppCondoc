@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login.service';
+import { LoginService } from 'src/app/services/login/login.service';
 import { NgForm }   from '@angular/forms';
 import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
     } 
-
+    
     ingresar(f: NgForm) {
         let data = f.value;
         if (this.user.username == '' || this.user.password == '') {
@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
                     let token = this.apiLogin.decode(res);
                     
                     if(token.estado == 'success') {
-                        sessionStorage.setItem('user', token.user);
                         sessionStorage.setItem('token', JSON.stringify(res));
                         this.router.navigate(['inicio']);
                     }else {
