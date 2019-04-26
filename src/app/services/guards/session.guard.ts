@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from "./../auth.service";
+import { log } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class SessionGuard implements CanActivate {
         state: RouterStateSnapshot): Observable<boolean> | boolean{
         
         let isLogged = this.auth.isLogged();
-    
+        
         if(isLogged) {
             return true;
         } else {

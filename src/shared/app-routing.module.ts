@@ -7,7 +7,7 @@ import { SessionGuard } from 'src/app/services/guards/session.guard';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent},
-    { path: 'login', component: LoginComponent, canActivate: [SessionGuard]},
+    { path: 'login', component: LoginComponent},
     { path: 'inicio', component: AdminComponent, canActivate: [SessionGuard]},
     { path:'**', pathMatch: 'full', redirectTo: 'home'}
 ];
