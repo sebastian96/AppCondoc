@@ -9,7 +9,12 @@
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a routerLink="/login" routerLinkActive="active" class="nav-link">Iniciar Sesíon</a>
+                    <a routerLink="/login" routerLinkActive="active" class="nav-link" *ngIf="!auth.canActivate()">
+                        Iniciar Sesíon
+                    </a>
+                    <a routerLink="/home" routerLinkActive="active" class="nav-link" *ngIf="auth.canActivate()">
+                        Cerrar sesíon
+                    </a>
                 </li>
             </ul>
         </div>

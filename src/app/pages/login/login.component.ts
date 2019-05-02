@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NgForm }   from '@angular/forms';
-import Swal from 'sweetalert2'
 import { Router } from '@angular/router';
-import { log } from 'util';
+import Swal from 'sweetalert2'
 
 @Component({
     selector: 'app-login',
@@ -37,7 +36,7 @@ export class LoginComponent implements OnInit {
                 }
             });
         } else {
-            this.apiLogin.login('login/login.php', data).subscribe(
+            this.apiLogin.login('login', data).subscribe(
                 response => {
                     let res = response;
                     let token = this.apiLogin.decode(res);

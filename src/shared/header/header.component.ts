@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { log } from 'util';
+import { SessionGuard } from 'src/app/services/guards/session.guard';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
-  title = 'AppCondoc'
+  constructor( public auth: SessionGuard) { }
+  
+  title = 'AppCondoc';
+
   ngOnInit() {
   }
 
+  salir(){
+    console.log("salir");
+  }
 }
