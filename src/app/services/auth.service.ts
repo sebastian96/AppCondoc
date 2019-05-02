@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
-import decode from "jwt-decode";
-import { log } from 'util';
+import decode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    constructor() { }
+    constructor( private router: Router ) { }
 
     isLogged() {
-        let token = sessionStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
 
-        if (token != null || token != '') {
-            console.log(token);
-            return true;
-            // const isLogged = this.decode(token);
-            // if (isLogged.estado === 'success') {
-            //     return true
-            // }
-            // if (isLogged.estado === 'error') {
-            //     return false
-            // }
-        } else {
+        if (token === null || token === '') {
             return false;
+        } else {
+            const isLogged = this.decode(token);
+            if (isLogged.estado === 'success') {
+                return true;
+            }
+            if (isLogged.estado === 'error') {
+                return false;
+            }
+            return true;
         }
+    }
+
+    logout() {
+        sessionStorage.removeItem('token');
+        this.router.navigate(['home']);
     }
 
     decode(token) {

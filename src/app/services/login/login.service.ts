@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import decode from "jwt-decode";
+import decode from 'jwt-decode';
+import { BehaviorSubject } from 'rxjs';
 
-interface responseJson {
-    nombre?: string,
-    apellido?: string,
-    usuario?: string,
-    estado?: string
+interface ResponseJson {
+    nombre?: string;
+    apellido?: string;
+    usuario?: string;
+    estado?: string;
 }
 @Injectable({
     providedIn: 'root'
 })
 export class LoginService {
 
-    public back_url = "http://localhost/backApp/api/prueba.php/";
+    public backUrl = 'http://localhost/appCondoc/backApp/api/prueba.php/';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     login(ruta: string, data: any) {
-        let resp = this.http.post<responseJson>(this.back_url.concat(ruta), data);        
+        const resp = this.http.post<ResponseJson>(this.backUrl.concat(ruta), data);
         return resp;
     }
 

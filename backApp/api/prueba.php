@@ -47,19 +47,35 @@ EOD;
         $user = $data['user'];
         $password = $data['password'];
 
-        $respuesta = [];
-
         $obj_db = new DataBase();
 
-        $consulta = "SELECT * FROM usuarios WHERE usuario = '$user' AND password = '$password'";
-        $obj_db->query($consulta);
+        $consultaUser = "SELECT * FROM usuarios WHERE usuario = '$user' AND password = '$password'";
+        $obj_db->query($consultaUser);
         $result = $obj_db->register();
+        $user_rows = $obj_db->rowCount();
 
-        if($obj_db->rowCount() > 0) {
+        if($user_rows > 0) { 
+            $consultaMenu ="SELECT 
+                                menu.titulo, menu.url
+                            FROM
+                                menu
+                                    INNER JOIN
+                                usuarios ON menu.id_rol = usuarios.id_rol
+                            WHERE
+                                usuarios.id_rol = $result->id_rol
+                                AND usuarios.usuario = '$result->usuario'";
+                                
+            $obj_db->query($consultaMenu);
+            $items = $obj_db->registers();
+            
+            
             $token = Array(
                 "nombre" => $result->nombre,
                 "apellido" => $result->apellido,
                 "user" => $result->usuario,
+                "documento" => $result->documento,
+                "rol_id" => $result->id_rol,
+                "menu" => $items,
                 "estado" => "success"
             );
         } else {
@@ -67,10 +83,10 @@ EOD;
                 "estado" => "error"
             );
         }
-
+        
         $jwt = JWT::encode($token, $privateKey, 'RS256');
 
-        echo json_encode($jwt);
+        return json_encode($jwt);
     });
 
     $app->run();

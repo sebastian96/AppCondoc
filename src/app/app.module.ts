@@ -27,7 +27,7 @@ import { AuthService } from './services/auth.service';
         HttpClientModule
     ],
     providers: [
-        LoginService, 
+        LoginService,
         SessionGuard,
         AuthService
     ],

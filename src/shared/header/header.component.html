@@ -1,18 +1,21 @@
 <header class="animated fadeIn">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <a href="" class="navbar-brand">{{title}}</a>
+        <a routerLink="/home" routerLinkActive="active" class="navbar-brand">{{title}}</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Menu de Navegacion">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav mr-auto">
+                <li *ngFor="let item of menuData" id="items_menu">
+                    <a routerLink="/{{item.url}}" class="nav-link" routerLinkActive="active">{{item.titulo}}</a>
+                </li>
             </ul>
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a routerLink="/login" routerLinkActive="active" class="nav-link" *ngIf="!auth.canActivate()">
+                    <a routerLink="/login" routerLinkActive="active" class="nav-link" *ngIf="!auth.isLogged()">
                         Iniciar Sesíon
                     </a>
-                    <a routerLink="/home" routerLinkActive="active" class="nav-link" *ngIf="auth.canActivate()">
+                    <a routerLink="/home" routerLinkActive="active" class="nav-link" *ngIf="auth.isLogged()" (click)="salir()">
                         Cerrar sesíon
                     </a>
                 </li>
