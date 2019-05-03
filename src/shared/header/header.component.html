@@ -5,9 +5,10 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav mr-auto">
-                <li *ngFor="let item of menuData" id="items_menu">
-                    <a routerLink="/{{item.url}}" class="nav-link" routerLinkActive="active">{{item.titulo}}</a>
+            <div class="navbar-nav mr-auto"></div>
+            <ul class="navbar-nav mr-auto" *ngIf="(headerHidden$ | async) as hide">
+                <li *ngFor="let item of menuData">
+                    <a routerLink="/{{item['url']}}" class="nav-link" routerLinkActive="active">{{item['titulo']}}</a>
                 </li>
             </ul>
             <ul class="navbar-nav">

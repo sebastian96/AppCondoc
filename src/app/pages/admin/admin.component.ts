@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login/login.service';
+import { Apiservice } from 'src/app/services/api.service';
 import { log } from 'util';
 
 @Component({
@@ -9,7 +9,7 @@ import { log } from 'util';
 })
 export class AdminComponent implements OnInit {
 
-  constructor(private apilogin: LoginService) { }
+  constructor(private apilogin: Apiservice) { }
 
   ngOnInit() {
   }

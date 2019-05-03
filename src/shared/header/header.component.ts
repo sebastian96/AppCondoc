@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionGuard } from 'src/app/services/guards/session.guard';
 import { AuthService } from 'src/app/services/auth.service';
+import { Apiservice } from 'src/app/services/api.service';
 import { Observable } from 'rxjs';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -10,26 +11,34 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-    menuData: object = {};
+    menuData: Array<object> = [];
+    headerHidden$: Observable<boolean>;
+    isHeadeMenuHidden: boolean;
     constructor(
-        public session: SessionGuard,
-        public auth: AuthService
-    ) { }
+        public auth: AuthService,
+        public api: Apiservice,
+        public router: Router,
+    ) {
+        router.events.forEach((event) => {
+            if (event instanceof NavigationEnd ) {
+                if (event.url === '/inicio') {
+                    this.menu();
+                }
+            }
+          });
+    }
     title = 'AppCondoc';
 
     ngOnInit() {
-        this.menu();
-    }
+        this.headerHidden$ = this.auth.hide;
+     }
 
     salir() {
-       this.auth.logout();
-       const menu = document.querySelectorAll('#items_menu');
+        this.auth.logout();
     }
 
     menu() {
-        const token = sessionStorage.getItem('token');
-        const user = this.auth.decode(token);
-        console.log(user.menu);
-        this.menuData = user.menu;
+        const userToken = this.auth.getTokenSession();
+        this.menuData = userToken.menu;
     }
 }

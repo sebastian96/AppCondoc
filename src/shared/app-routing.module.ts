@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from 'src/app/pages/home/home.component';
 import { LoginComponent } from 'src/app/pages/login/login.component';
 import { AdminComponent } from 'src/app/pages/admin/admin.component';
-import { SessionGuard } from 'src/app/services/guards/session.guard';
+import { SessionGuard } from 'src/app/services/session.guard';
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent},

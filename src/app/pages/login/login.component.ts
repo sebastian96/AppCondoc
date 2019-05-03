@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginService } from 'src/app/services/login/login.service';
+import { Apiservice } from 'src/app/services/api.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     };
 
     constructor(
-        private apiLogin: LoginService,
+        private apiLogin: Apiservice,
         private auth: AuthService,
         private router: Router
     ) { }
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
             this.apiLogin.login('login', data).subscribe(
                 response => {
                     const res = response;
-                    const token = this.apiLogin.decode(res);
+                    const token = this.auth.decode(res);
                     if (token.estado === 'success') {
                         sessionStorage.setItem('token', JSON.stringify(res));
                         this.router.navigate(['inicio']);

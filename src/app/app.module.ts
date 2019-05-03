@@ -8,9 +8,9 @@ import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './pages/admin/admin.component';
-import { LoginService } from './services/login/login.service';
-import { SessionGuard } from './services/guards/session.guard';
+import { SessionGuard } from './services/session.guard';
 import { AuthService } from './services/auth.service';
+import { Apiservice } from './services/api.service';
 
 @NgModule({
     declarations: [
@@ -27,7 +27,7 @@ import { AuthService } from './services/auth.service';
         HttpClientModule
     ],
     providers: [
-        LoginService,
+        Apiservice,
         SessionGuard,
         AuthService
     ],

@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import decode from 'jwt-decode';
-import { BehaviorSubject } from 'rxjs';
 
 interface ResponseJson {
     nombre?: string;
@@ -12,9 +10,9 @@ interface ResponseJson {
 @Injectable({
     providedIn: 'root'
 })
-export class LoginService {
+export class Apiservice {
 
-    public backUrl = 'http://localhost/appCondoc/backApp/api/prueba.php/';
+    public backUrl = 'http://localhost/appCondoc/backApp/api/ctrlGeneral.php/';
 
     constructor(private http: HttpClient) {}
 
@@ -22,9 +20,4 @@ export class LoginService {
         const resp = this.http.post<ResponseJson>(this.backUrl.concat(ruta), data);
         return resp;
     }
-
-    decode(token) {
-        return decode(token);
-    }
-
 }
