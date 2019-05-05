@@ -7,14 +7,6 @@
 
     $app = new \Slim\App;
 
-    // FUNCION DE PRUEBA PARA INICIO DE SLIM ↓↓↓
-    $app->get('/hello/{name}', function (Request $request, Response $response, array $args) {
-        $name = $args['name'];
-        $response->getBody()->write("Hello, $name");
-
-        return $response;
-    });
-
     $app->post('/login', function(Request $request, Response $response, array $args){
         $data = $request->getParsedBody();
 
@@ -49,34 +41,48 @@ EOD;
 
         $obj_db = new DataBase();
 
-        $consultaUser = "SELECT * FROM usuarios WHERE usuario = '$user' AND password = '$password'";
+        $consultaUser = "SELECT 
+                            tb_usuarios.IdRol,
+                            tb_usuarios.IdUsuario,
+                            tb_usuarios.Usuario,
+                            tb_col.NomColaborador,
+                            tb_col.ApeColaborador,
+                            tb_col.CorreoColaborador,
+                            tb_col.TipDocColaborador,
+                            tb_col.DocumentoColaborador
+                        FROM
+                            tb_usuarios
+                                INNER JOIN
+                            tb_colaboradores tb_col ON tb_usuarios.IdUsuario = tb_col.IdColaborador
+                                WHERE
+                            tb_usuarios.Usuario = '$user' AND tb_usuarios.Password = '$password'";
+
         $obj_db->query($consultaUser);
         $result = $obj_db->register();
         $user_rows = $obj_db->rowCount();
 
         if($user_rows > 0) { 
             $consultaMenu ="SELECT 
-                                menu.titulo, menu.url
+                                TituloMenu, ClaseMenu, UrlMenu
                             FROM
-                                menu
-                                    INNER JOIN
-                                usuarios ON menu.id_rol = usuarios.id_rol
+                                tb_menu
                             WHERE
-                                usuarios.id_rol = $result->id_rol
-                                AND usuarios.usuario = '$result->usuario'";
+                                RolId = $result->IdRol";
                                 
             $obj_db->query($consultaMenu);
             $items = $obj_db->registers();
             
-            
             $token = Array(
-                "nombre" => $result->nombre,
-                "apellido" => $result->apellido,
-                "user" => $result->usuario,
-                "documento" => $result->documento,
-                "rol_id" => $result->id_rol,
-                "menu" => $items,
-                "estado" => "success"
+                "nombre" => $result->NomColaborador,
+                "apellido" => $result->ApeColaborador,
+                "user" => $result->Usuario,
+                "tipoDoc" => $result->TipDocColaborador,
+                "documento" => $result->DocumentoColaborador,
+                "correo" => $result->CorreoColaborador,
+                "rol_id" => $result->IdRol,
+                "usu_id" => $result->IdUsuario,
+                "estado" => "success",
+                "menu" => $items
             );
         } else {
             $token = Array(
@@ -85,8 +91,8 @@ EOD;
         }
         
         $jwt = JWT::encode($token, $privateKey, 'RS256');
-
         return json_encode($jwt);
+
     });
 
     $app->run();

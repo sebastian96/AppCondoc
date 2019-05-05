@@ -1,22 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
 body {
     font-family: 'Open Sans', sans-serif;
     overflow: hidden;
 }
+
 .main {
     height: 100vh;
     width: 100vw;
 }
+
 .bg-image {
     position: absolute;
-	vertical-align: top;
-	width: 100vw;
+    vertical-align: top;
+    width: 100vw;
     height: 100vh;
-	filter: blur(4px);
+    filter: blur(4px);
 }
+
 .fz-bold {
     font-weight: bold;
 }
+
 .fz-20 {
     font-size: 20px;
+}
+
+.fz-15 {
+    font-size: 15px;
 }
