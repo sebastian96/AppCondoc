@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
         } else {
             this.apiLogin.login('login', data).subscribe(
                 response => {
-                    console.log(response);
                     const res = response;
                     const token = this.auth.decode(res);
                     if (token.estado === 'success') {

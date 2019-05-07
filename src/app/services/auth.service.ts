@@ -38,7 +38,7 @@ export class AuthService {
     logout() {
         sessionStorage.removeItem('token');
         this.headerHidden.next(false);
-        this.router.navigate(['home']);
+        this.router.navigate(['']);
     }
 
     getTokenSession() {

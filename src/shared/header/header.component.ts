@@ -14,24 +14,20 @@ export class HeaderComponent implements OnInit {
     menuData: Array<object> = [];
     headerHidden$: Observable<boolean>;
     isHeadeMenuHidden: boolean;
-    constructor(
-        public auth: AuthService,
-        public api: Apiservice,
-        public router: Router,
-    ) {
+    title = 'AppCondoc';
+
+    constructor( public auth: AuthService, public api: Apiservice, public router: Router ) {
         router.events.forEach((event) => {
             if (event instanceof NavigationEnd ) {
-                if (event.url === '/inicio') {
+                if (event.url !== '/login' && event.url !== '/') {
+                    this.headerHidden$ = this.auth.hide;
                     this.menu();
                 }
             }
-          });
+        });
     }
-    title = 'AppCondoc';
 
-    ngOnInit() {
-        this.headerHidden$ = this.auth.hide;
-     }
+    ngOnInit() {}
 
     salir() {
         this.auth.logout();

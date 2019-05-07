@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
         if (this.auth.isLogged()) {
             this.router.navigate(['inicio']);
         } else {
-            this.router.navigate(['home']);
+            this.router.navigate(['']);
         }
     }
 
