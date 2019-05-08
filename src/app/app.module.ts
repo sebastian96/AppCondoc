@@ -11,8 +11,9 @@ import { Apiservice } from './services/api.service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
-import { HeaderComponent } from 'src/shared/header/header.component';
 import { LoginComponent } from './pages/login/login.component';
+import { HeaderComponent } from '../shared/header/header.component';
+
 
 @NgModule({
     declarations: [

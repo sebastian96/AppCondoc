@@ -3,6 +3,8 @@
 body {
     font-family: 'Open Sans', sans-serif;
     overflow: hidden;
+    background-image: url('assets/img/grey_wash_wall.png');
+    background-repeat: repeat;
 }
 
 .main {
@@ -66,4 +68,21 @@ body {
             border-width: 0.5em 0.5em 0 0.5em;
         }
     }
+}
+
+.custom-file-label {
+    cursor: pointer;
+    &:after {
+        border: 1px solid #343a40;
+        color: #343a40;
+        cursor: pointer;
+    }
+}
+
+.form-check-label {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
 }

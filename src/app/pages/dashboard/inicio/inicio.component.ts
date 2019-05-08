@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { log } from 'util';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
     selector: 'app-inicio',

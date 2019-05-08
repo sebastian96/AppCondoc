@@ -1,3 +1,98 @@
-<p>
-  user-create works!
-</p>
+<div class="animated fadeIn row main ml-0">
+    <div class="container mt-5">
+        <div class="row bg-primary d-flex justify-content-between p-4">
+            <div class="col col-12 col-md-9">
+                <h3 class="text-light">FORMULARIO DE REGISTRO</h3>
+            </div>
+            <div class="col col-12 col-md-3">
+                <a [routerLink]="['../listar']" routerLinkActive="router-link-active" class="btn btn-outline-light btn-sm btn-block">Regresar</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col mt-4 box-shadow p-4 bg-light">
+                <form action="">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Nombres</label>
+                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese nombres" id="name" autofocus>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group ">
+                                <label class="text-primary fz-bold" for="name">Apellidos</label>
+                                <input type="text " class="form-control bg-dark text-light " placeholder="Ingrese apellidos" id="apellido">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Correo</label>
+                                <input type="email" class="form-control bg-dark text-light" placeholder="Ingrese correo" id="correo">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Foto</label>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile02">
+                                    <label class="custom-file-label bg-dark text-light" for="inputGroupFile02">Seleccionar archivo</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold mb-sm-2" for="name">Tipo de documento</label>
+                                <div class="col-12 d-flex justify-content-around">
+                                    <div class="form-check">
+                                        <label class="form-check-label btn btn-sm btn-dark text-light" for="ti">
+                                            <input type="radio" name="type" class="form-check-input mr-2 d-none" value="T.I.">Tarjeta de identidad
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label btn btn-sm btn-dark text-light" for="cc">
+                                            <input type="radio" name="type" class="form-check-input mr-2 d-none" value="C.C">Cedula de ciudadania
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Documento</label>
+                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese documento" id="correo">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Seleccione el cargo</label>
+                                <select name="rol" class="form-control bg-dark text-light">
+                                    <option value="" hidden>seleccionar</option>
+                                    <option value="1">Estudiante</option>
+                                    <option value="2">Docente</option>
+                                    <option value="3">Coordinador</option>
+                                    <option value="4">Registro y control</option>
+                                    <option value="5">Director</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Contraseña</label>
+                                <input type="password" class="form-control bg-dark text-light" placeholder="Ingrese contraseña" id="correo">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6">
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Confirmar contraseña</label>
+                                <input type="password" class="form-control bg-dark text-light" placeholder="Ingrese nuevamente la contraseña" id="correo">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <input type="submit" class="btn btn-info btn-block" value="Registrar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

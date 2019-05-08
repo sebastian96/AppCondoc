@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { Apiservice } from 'src/app/services/api.service';
-import { Observable } from 'rxjs';
 import { Router, NavigationEnd } from '@angular/router';
+
+import { AuthService } from '../../app/services/auth.service';
+import { Apiservice } from '../../app/services/api.service';
+
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-header',

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Apiservice } from 'src/app/services/api.service';
 import { NgForm } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+
 import { AuthService } from '../../services/auth.service';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Apiservice } from '../../services/api.service';
+
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-login',
