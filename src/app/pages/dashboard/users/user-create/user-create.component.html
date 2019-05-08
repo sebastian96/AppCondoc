@@ -10,62 +10,58 @@
         </div>
         <div class="row">
             <div class="col mt-4 box-shadow p-4 bg-light">
-                <form action="">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label class="text-primary fz-bold" for="name">Nombres</label>
-                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese nombres" id="name" autofocus>
+                <form [formGroup]="form" (ngSubmit)="register()">
+                    <div class="row ">
+                        <div class="col-12 col-sm-12 col-md-6 ">
+                            <div class="form-group ">
+                                <label class="text-primary fz-bold " for="name">Nombres</label>
+                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese nombres" formControlName="nombres">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6">
+                        <div class="col-12 col-sm-12 col-md-6 ">
                             <div class="form-group ">
                                 <label class="text-primary fz-bold" for="name">Apellidos</label>
-                                <input type="text " class="form-control bg-dark text-light " placeholder="Ingrese apellidos" id="apellido">
+                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese apellidos" formControlName="apellidos">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6">
-                            <div class="form-group">
+                        <div class="col-12 col-sm-12 col-md-6 ">
+                            <div class="form-group ">
                                 <label class="text-primary fz-bold" for="name">Correo</label>
-                                <input type="email" class="form-control bg-dark text-light" placeholder="Ingrese correo" id="correo">
+                                <input type="email" class="form-control bg-dark text-light" placeholder="Ingrese correo" formControlName="correo">
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6">
-                            <div class="form-group">
+                        <!-- <div class="col-12 col-sm-12 col-md-6 ">
+                            <div class="form-group ">
                                 <label class="text-primary fz-bold" for="name">Foto</label>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile02">
-                                    <label class="custom-file-label bg-dark text-light" for="inputGroupFile02">Seleccionar archivo</label>
+                                    <input type="file" class="custom-file-input" id="file">
+                                    <label class="custom-file-label bg-dark text-light" for="file">Seleccionar archivo</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="text-primary fz-bold mb-sm-2" for="name">Tipo de documento</label>
-                                <div class="col-12 d-flex justify-content-around">
-                                    <div class="form-check">
-                                        <label class="form-check-label btn btn-sm btn-dark text-light" for="ti">
-                                            <input type="radio" name="type" class="form-check-input mr-2 d-none" value="T.I.">Tarjeta de identidad
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label btn btn-sm btn-dark text-light" for="cc">
-                                            <input type="radio" name="type" class="form-check-input mr-2 d-none" value="C.C">Cedula de ciudadania
-                                        </label>
-                                    </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="check1" checked="" value="1">
+                                    <label class="custom-control-label text-primary" for="check1">Cedula de ciudadania</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input" id="check2" value="2">
+                                    <label class="custom-control-label text-primary" for="check2">Tarjeta de identidad</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="text-primary fz-bold" for="name">Documento</label>
-                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese documento" id="correo">
+                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese documento">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="text-primary fz-bold" for="name">Seleccione el cargo</label>
-                                <select name="rol" class="form-control bg-dark text-light">
+                                <select class="form-control bg-dark text-light">
                                     <option value="" hidden>seleccionar</option>
                                     <option value="1">Estudiante</option>
                                     <option value="2">Docente</option>
@@ -74,24 +70,25 @@
                                     <option value="5">Director</option>
                                 </select>
                             </div>
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-6">
+                        </div> -->
+                        <!-- <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="text-primary fz-bold" for="name">Contraseña</label>
-                                <input type="password" class="form-control bg-dark text-light" placeholder="Ingrese contraseña" id="correo">
+                                <input type="password " class="form-control bg-dark text-light" placeholder="Ingrese contraseña" id="correo">
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="text-primary fz-bold" for="name">Confirmar contraseña</label>
-                                <input type="password" class="form-control bg-dark text-light" placeholder="Ingrese nuevamente la contraseña" id="correo">
+                                <input type="password" class="form-control bg-dark text-light " placeholder="Ingrese nuevamente la contraseña" id="correo">
                             </div>
-                        </div>
-                        <div class="col-12">
-                            <input type="submit" class="btn btn-info btn-block" value="Registrar">
+                        </div> -->
+                        <div class="col-12 offset-3">
+                            <input type="submit" class="btn btn-info w-50" value="Registrar">
                         </div>
                     </div>
                 </form>
+                {{ form.valid }}
             </div>
         </div>
     </div>
