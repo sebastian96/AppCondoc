@@ -95,5 +95,22 @@ EOD;
 
     });
 
+    $app->get('/listarUsuarios', function(Request $request, Response $response, array $args){
+        $data = $request->getParsedBody();
+        $obj_db = new DataBase();
+
+        $selectUsers = "SELECT 
+                            tb_usuarios.Usuario,
+                            tb_col.CorreoColaborador,
+                            tb_col.DocumentoColaborador
+                        FROM
+                            tb_usuarios
+                            INNER JOIN
+                            tb_colaboradores tb_col ON tb_usuarios.IdColaborador = tb_col.IdColaborador";
+        $obj_db->query($selectUsers);
+        $users = $obj_db->registers();
+        return json_encode($users);
+    });
+
     $app->run();
 ?>

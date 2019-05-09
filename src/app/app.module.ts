@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { HeaderComponent } from '../shared/header/header.component';
+import { FooterComponent } from '../shared/footer/footer.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { HeaderComponent } from '../shared/header/header.component';
         AppComponent,
         HomeComponent,
         HeaderComponent,
+        FooterComponent,
         LoginComponent,
     ],
     imports: [

@@ -18,7 +18,12 @@ export class Apiservice {
     constructor(private http: HttpClient) {}
 
     login(ruta: string, data: any) {
-        const resp = this.http.post<ResponseJson>(this.backUrl.concat(ruta), data);
-        return resp;
+        const RESP = this.http.post<ResponseJson>(this.backUrl.concat(ruta), data);
+        return RESP;
+    }
+
+    listUsers(ruta: string) {
+        const RESP = this.http.get(this.backUrl.concat(ruta));
+        return RESP;
     }
 }

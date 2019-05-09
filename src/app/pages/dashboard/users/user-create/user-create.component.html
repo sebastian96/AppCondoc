@@ -1,4 +1,4 @@
-<div class="animated fadeIn row main ml-0">
+<div class="animated fadeIn main ml-0">
     <div class="container mt-5">
         <div class="row bg-primary d-flex justify-content-between p-4">
             <div class="col col-12 col-md-9">
@@ -13,55 +13,114 @@
                 <form [formGroup]="form" (ngSubmit)="register()">
                     <div class="row ">
                         <div class="col-12 col-sm-12 col-md-6 ">
-                            <div class="form-group ">
-                                <label class="text-primary fz-bold " for="name">Nombres</label>
+                            <div class="form-group">
+                                <label class="text-primary fz-bold" for="name">Nombres</label>
                                 <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese nombres" formControlName="nombres">
+                                <div *ngIf="form.controls['nombres'].touched">
+                                    <div *ngIf="form.controls['nombres'].errors?.required">
+                                        <strong class="text-danger fz-bold">* Este campo es requerido</strong>
+                                    </div>
+                                </div>
+                                <div *ngIf="form.controls['nombres'].errors?.minlength">
+                                    <strong class="text-danger fz-bold">* Este campo debe tener minimo 3 caracteres</strong>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 ">
                             <div class="form-group ">
                                 <label class="text-primary fz-bold" for="name">Apellidos</label>
                                 <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese apellidos" formControlName="apellidos">
+                                <div *ngIf="form.controls['apellidos'].touched">
+                                    <div *ngIf="form.controls['apellidos'].errors?.required">
+                                        <strong class="text-danger fz-bold">* Este campo es requerido</strong>
+                                    </div>
+                                </div>
+                                <div *ngIf="form.controls['apellidos'].errors?.minlength">
+                                    <strong class="text-danger fz-bold">* Este campo debe tener minimo 3 caracteres</strong>
+                                </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6 ">
                             <div class="form-group ">
                                 <label class="text-primary fz-bold" for="name">Correo</label>
                                 <input type="email" class="form-control bg-dark text-light" placeholder="Ingrese correo" formControlName="correo">
-                            </div>
-                        </div>
-                        <!-- <div class="col-12 col-sm-12 col-md-6 ">
-                            <div class="form-group ">
-                                <label class="text-primary fz-bold" for="name">Foto</label>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="file">
-                                    <label class="custom-file-label bg-dark text-light" for="file">Seleccionar archivo</label>
+                                <div *ngIf="form.controls['correo'].touched">
+                                    <div *ngIf="form.controls['correo'].errors?.required">
+                                        <strong class="text-danger fz-bold">* Este campo es requerido</strong>
+                                    </div>
+                                </div>
+                                <div *ngIf="form.controls['correo'].errors?.pattern">
+                                    <strong class="text-danger fz-bold">* Ingrese un correo valido</strong>
+                                </div>
+                                <div *ngIf="form.controls['correo'].errors?.existe">
+                                    <strong class="text-danger fz-bold">* Este correo ya esta en uso</strong>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 ">
+                            <div class="form-group ">
+                                <label class="text-primary fz-bold" for="name">Usuario</label>
+                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese usuario" formControlName="usuario">
+                                <div *ngIf="form.controls['usuario'].touched">
+                                    <div *ngIf="form.controls['usuario'].errors?.required">
+                                        <strong class="text-danger fz-bold">* Este campo es requerido</strong>
+                                    </div>
+                                </div>
+                                <div *ngIf="form.controls['usuario'].errors?.existe">
+                                    <strong class="text-danger fz-bold">* Este usuario ya esta en uso</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 align-items-center d-flex box-fixed">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="file" accept="image/jpg, image/png" formControlName="foto" (change)="previewImage($event)">
+                                <label class="custom-file-label bg-dark text-light" for="file" *ngIf="!form.controls['foto'].value">Seleccione una foto</label>
+                                <label class="custom-file-label bg-dark text-light" for="file" *ngIf="form.controls['foto'].value">Cambiar foto</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-6 box-fixed align-items-center d-flex justify-content-center box-fixed">
+                            <img *ngIf="form.controls['foto'].value" [src]="url" alt="imageUser" class="img-fluid w-50 h-75 mb-3">
+                            <img *ngIf="!form.controls['foto'].value" src="assets/img/user.png" alt="imageUser" class="img-fluid w-50 h-75 mb-3">
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="text-primary fz-bold mb-sm-2" for="name">Tipo de documento</label>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="check1" checked="" value="1">
-                                    <label class="custom-control-label text-primary" for="check1">Cedula de ciudadania</label>
+                                <div class="d-flex">
+                                    <div class="custom-control custom-radio">
+                                        <input type="radio" class="custom-control-input" id="check1" value="1" formControlName="tipo">
+                                        <label class="custom-control-label btn btn-dark btn-sm" for="check1">Cedula de ciudadania</label>
+                                    </div>
+                                    <div class="custom-control custom-radio ml-1">
+                                        <input type="radio" class="custom-control-input" id="check2" value="2" formControlName="tipo">
+                                        <label class="custom-control-label btn btn-dark btn-sm" for="check2">Tarjeta de identidad</label>
+                                    </div>
                                 </div>
-                                <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="check2" value="2">
-                                    <label class="custom-control-label text-primary" for="check2">Tarjeta de identidad</label>
+                                <div *ngIf="form.controls['tipo'].errors?.required">
+                                    <strong class="text-danger fz-bold">* Seleccione un tipo de documento</strong>
                                 </div>
                             </div>
                         </div>
                         <div class="col-12 col-sm-12 col-md-6">
                             <div class="form-group">
                                 <label class="text-primary fz-bold" for="name">Documento</label>
-                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese documento">
+                                <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese documento" formControlName="documento">
+                                <div *ngIf="form.controls['documento'].touched">
+                                    <div *ngIf="form.controls['documento'].errors?.required">
+                                        <strong class="text-danger fz-bold">* Este campo es requerido</strong>
+                                    </div>
+                                </div>
+                                <div *ngIf="form.controls['documento'].errors?.pattern">
+                                    <strong class="text-danger fz-bold">* Ingrese una identificacion valida</strong>
+                                </div>
+                                <div *ngIf="form.controls['documento'].errors?.existe">
+                                    <strong class="text-danger fz-bold">* La cedula ya esta registrada</strong>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label class="text-primary fz-bold" for="name">Seleccione el cargo</label>
-                                <select class="form-control bg-dark text-light">
+                                <select class="form-control bg-dark text-light" formControlName="cargo">
                                     <option value="" hidden>seleccionar</option>
                                     <option value="1">Estudiante</option>
                                     <option value="2">Docente</option>
@@ -69,22 +128,52 @@
                                     <option value="4">Registro y control</option>
                                     <option value="5">Director</option>
                                 </select>
-                            </div>
-                        </div> -->
-                        <!-- <div class="col-12 col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label class="text-primary fz-bold" for="name">Contraseña</label>
-                                <input type="password " class="form-control bg-dark text-light" placeholder="Ingrese contraseña" id="correo">
+                                <div *ngIf="form.controls['cargo'].errors?.required">
+                                    <strong class="text-danger fz-bold">* Seleccione un cargo</strong>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-12 col-sm-12 col-md-6">
-                            <div class="form-group">
-                                <label class="text-primary fz-bold" for="name">Confirmar contraseña</label>
-                                <input type="password" class="form-control bg-dark text-light " placeholder="Ingrese nuevamente la contraseña" id="correo">
+                        <div class="col-12" *ngIf="form.controls['cargo'].value == 3 || form.controls['cargo'].value == 4 || form.controls['cargo'].value == 5">
+                            <div class="row">
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="text-primary fz-bold" for="name">Contraseña</label>
+                                        <input type="password" class="form-control bg-dark text-light" placeholder="Ingrese contraseña" formControlName="password1">
+                                        <div *ngIf="form.controls['password1'].touched">
+                                            <div *ngIf="form.controls['password1'].errors?.required">
+                                                <strong class="text-danger fz-bold">* Este campo es requerido</strong>
+                                            </div>
+                                            <div *ngIf="form.controls['password2'].errors?.different">
+                                                <strong class="text-danger fz-bold">* Contraseñas diferentes</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-6">
+                                    <div class="form-group">
+                                        <label class="text-primary fz-bold" for="name">Confirmar contraseña</label>
+                                        <input type="password" class="form-control bg-dark text-light " placeholder="Ingrese nuevamente la contraseña" formControlName="password2">
+                                        <div *ngIf="form.controls['password2'].touched">
+                                            <div *ngIf="form.controls['password2'].errors?.required">
+                                                <strong class="text-danger fz-bold">* Este campo es requerido</strong>
+                                            </div>
+                                            <div *ngIf="form.controls['password2'].errors?.different">
+                                                <strong class="text-danger fz-bold">* Contraseñas diferentes</strong>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div> -->
-                        <div class="col-12 offset-3">
-                            <input type="submit" class="btn btn-info w-50" value="Registrar">
+                        </div>
+                        <div class="col-12" *ngIf="form.controls['cargo'].value == 1 || form.controls['cargo'].value == 2">
+                            <div class="alert alert-dismissible alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                                <h4 class="alert-heading">WARNING!</h4>
+                                <p class="mb-0">Aqui va el sensor de huellas</p>
+                            </div>
+                        </div>
+                        <div class="col-12 offset-3 mt-4">
+                            <input [ngClass]="{'disabled': form.valid}" type="submit" class="btn btn-info w-50" value="Registrar">
                         </div>
                     </div>
                 </form>
