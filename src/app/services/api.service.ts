@@ -2,12 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { log } from 'util';
 
-interface ResponseJson {
-    nombre?: string;
-    apellido?: string;
-    usuario?: string;
-    estado?: string;
-}
 @Injectable({
     providedIn: 'root'
 })
@@ -18,12 +12,17 @@ export class Apiservice {
     constructor(private http: HttpClient) {}
 
     login(ruta: string, data: any) {
-        const RESP = this.http.post<ResponseJson>(this.backUrl.concat(ruta), data);
+        const RESP = this.http.post<object>(this.backUrl.concat(ruta), data);
         return RESP;
     }
 
     listUsers(ruta: string) {
-        const RESP = this.http.get(this.backUrl.concat(ruta));
+        const RESP = this.http.get<object>(this.backUrl.concat(ruta));
+        return RESP;
+    }
+
+    insertUsers(ruta: string, data: any) {
+        const RESP = this.http.post<object>(this.backUrl.concat(ruta), data);
         return RESP;
     }
 }

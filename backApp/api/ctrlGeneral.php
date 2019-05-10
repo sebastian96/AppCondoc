@@ -2,10 +2,12 @@
     use \Psr\Http\Message\ServerRequestInterface as Request;
     use \Psr\Http\Message\ResponseInterface as Response;
     use \Firebase\JWT\JWT;
+
     require '../vendor/autoload.php';
     include '../config/conexion.php';
-
+    
     $app = new \Slim\App;
+
 
     $app->post('/login', function(Request $request, Response $response, array $args){
         $data = $request->getParsedBody();
@@ -95,7 +97,7 @@ EOD;
 
     });
 
-    $app->get('/listarUsuarios', function(Request $request, Response $response, array $args){
+    $app->get('/getUsers', function(Request $request, Response $response, array $args){
         $data = $request->getParsedBody();
         $obj_db = new DataBase();
 
@@ -110,6 +112,57 @@ EOD;
         $obj_db->query($selectUsers);
         $users = $obj_db->registers();
         return json_encode($users);
+    });
+
+    $app->post('/userInsert', function(Request $request, Response $response, array $args){
+        $data = $request->getParsedBody();
+        $obj_db = new DataBase();
+        $response = [];
+
+        $nombres = $data['nombres'];
+        $apellidos = $data['apellidos'];
+        $correo = $data['correo'];
+        $tipDoc = $data['tipo'];
+        $documento = $data['documento'];
+        $imgUser = $data['foto'];
+        $userName = $data['usuario'];
+        $password = $data['password'];
+
+        if($imgUser !== '' || $imgUser === null) {
+
+            list(, $imgUser) = explode(';', $imgUser);
+            list(, $imgUser) = explode(',', $imgUser);
+    
+            $decodeImage = base64_decode($imgUser);
+            
+            $directorio = $_SERVER["DOCUMENT_ROOT"] . '/AppCondoc/dist/AppCondoc/assets/img/users/' . $userName;
+            // $directorio = $_SERVER["DOCUMENT_ROOT"] . '/AppCondoc/src/assets/img/users/' . $userName;
+            $directorio_img = $directorio . '/foto.png';
+                    
+            if(!file_exists($directorio)) {
+                mkdir($directorio, 0777, true);
+                file_put_contents($directorio . '/foto.png', $decodeImage);
+            } else {
+                file_put_contents($directorio . '/foto.png', $decodeImage);
+            }
+
+            $insertColaborador = "INSERT INTO tb_colaboradores (IdColaborador, NomColaborador, ApeColaborador, CorreoColaborador, TipDocColaborador, DocumentoColaborador, HuellaColaborador, FotoColaborador) VALUES (NULL, '$nombres', '$apellidos', '$correo', '$tipDoc', '$documento', NULL, '$directorio_img')";
+
+            $obj_db->query($insertColaborador);
+            $obj_db->execute();
+
+            $selectColaborador = "SELECT IdColaborador FROM tb_colaboradores WHERE DocumentoColaborador = '$documento'";
+            $obj_db->query($selectColaborador);
+            $result = $obj_db->register();
+
+            $insertUser = "INSERT INTO tb_usuarios (IdUsuario, Usuario, Password, IdColaborador, IdRol) VALUES (NULL, '$userName', '$password', $result->IdColaborador, 7)";
+            $obj_db->query($insertUser);
+            $obj_db->execute();
+        }
+
+        
+        return json_encode($insertUser);
+
     });
 
     $app->run();

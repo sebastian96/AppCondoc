@@ -1,14 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    overflow-x: hidden;
+    font-family: 'Open Sans', sans-serif !important;
+    overflow: hidden;
     background-image: url('assets/img/grey_wash_wall.png');
     background-repeat: repeat;
 }
 
-.main {
-    padding-bottom: 25px;
+.box-login {
+    height: 85vh;
 }
 
 .bg-image {
@@ -29,6 +29,10 @@ body {
 
 .fz-15 {
     font-size: 15px;
+}
+
+.pb-80 {
+    padding-bottom: 80px;
 }
 
 .box-shadow {

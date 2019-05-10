@@ -8,7 +8,7 @@
             <div class="navbar-nav mr-auto"></div>
             <ul class="navbar-nav mr-auto" *ngIf="(headerHidden$ | async) as hide">
                 <li class="nav-item" *ngFor="let item of menuData" routerLinkActive="active">
-                    <a routerLink="dashboard/{{item['UrlMenu']}}" class="nav-link fz-15 ml-md-4">
+                    <a routerLink="dashboard/{{item['UrlMenu']}}" class="nav-link fz-15 ml-md-1">
                         <i class="{{item['ClaseMenu']}}"></i> {{item['TituloMenu']}}
                     </a>
                 </li>

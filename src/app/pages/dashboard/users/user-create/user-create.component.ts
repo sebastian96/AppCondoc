@@ -1,31 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Apiservice } from '../../../../services/api.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { log } from 'util';
 
 @Component({
     selector: 'app-user-create',
     templateUrl: './user-create.component.html',
     styleUrls: ['./user-create.component.scss']
 })
-export class UserCreateComponent implements OnInit {
+export class UserCreateComponent implements OnInit, OnDestroy {
 
     form: FormGroup;
-    url = '';
+    url: any = '';
     data: any;
     usersUsed: Array<any> = [];
+    body: HTMLCollectionOf<HTMLBodyElement> = document.getElementsByTagName('body');
 
     constructor( public Api: Apiservice) {
-
+        this.body[0].style.overflowY = 'scroll';
     }
 
     ngOnInit() {
         this.form = new FormGroup({
-            nombres: new FormControl('', [Validators.required, Validators.minLength(3)]),
-            apellidos: new FormControl('', [Validators.required, Validators.minLength(3)]),
-            correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')], this.existUser.bind(this)),
+            nombres: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[A-Za-z]+')]),
+            apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[A-Za-z]+')]),
+            correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'), Validators.email], this.existUser.bind(this)),
             usuario: new FormControl('', Validators.required, this.existUser.bind(this)),
             foto: new FormControl('', ),
             tipo: new FormControl('', Validators.required),
@@ -43,9 +43,30 @@ export class UserCreateComponent implements OnInit {
     }
 
     register() {
-        if (!this.form.valid) {
-            console.log(this.form);
+        if (this.form.valid) {
+            const datosUsuario: object = {
+                nombres: this.form.controls.nombres.value,
+                apellidos: this.form.controls.apellidos.value,
+                correo: this.form.controls.correo.value,
+                usuario: this.form.controls.usuario.value,
+                password: this.form.controls.password1.value,
+                cargo: this.form.controls.cargo.value,
+                nameFoto: this.form.controls.foto.value,
+                foto: this.url,
+                tipo: this.form.controls.tipo.value,
+                documento: this.form.controls.documento.value
+            };
+            // console.log(datosUsuario);
+            this.Api.insertUsers('userInsert', datosUsuario).subscribe(
+                (response) => {
+                    console.log(response);
+                },
+                error => {
+                    console.log(error.error.text);
+                }
+            );
         } else {
+            console.log(this.form);
             Swal.fire({
                 title: 'Campos vacíos o incorrectos',
                 type: 'error',
@@ -84,9 +105,8 @@ export class UserCreateComponent implements OnInit {
     existUser( control: FormControl ): Promise<any>|Observable<any> {
         const PROMESA = new Promise(
             ( resolve, reject ) => {
-                this.Api.listUsers('listarUsuarios').subscribe(
+                this.Api.listUsers('getUsers').subscribe(
                     (Response: Array<any>) => {
-                        console.log(Response);
                         Response.map((dato) => {
                             if (control.value === dato.Usuario || control.value === dato.CorreoColaborador || control.value === dato.DocumentoColaborador) {
                                 resolve({ existe: true });
@@ -102,6 +122,10 @@ export class UserCreateComponent implements OnInit {
             }
         );
         return PROMESA;
+    }
+
+    ngOnDestroy(): void {
+        this.body[0].style.overflowY = 'hidden';
     }
 
 
