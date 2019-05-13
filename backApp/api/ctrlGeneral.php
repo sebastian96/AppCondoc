@@ -8,9 +8,11 @@
     
     $app = new \Slim\App;
 
-
     $app->post('/login', function(Request $request, Response $response, array $args){
         $data = $request->getParsedBody();
+        $user = $data['user'];
+        $password = $data['password'];
+        $obj_db = new DataBase();
 
 $privateKey = <<<EOD
 -----BEGIN RSA PRIVATE KEY-----
@@ -37,11 +39,6 @@ MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC8kGa1pSjbSYZVebtTRBLxBz5H
 ehde/zUxo6UvS7UrBQIDAQAB
 -----END PUBLIC KEY-----
 EOD;
-
-        $user = $data['user'];
-        $password = $data['password'];
-
-        $obj_db = new DataBase();
 
         $consultaUser = "SELECT 
                             tb_usuarios.IdRol,
@@ -98,7 +95,6 @@ EOD;
     });
 
     $app->get('/getUsers', function(Request $request, Response $response, array $args){
-        $data = $request->getParsedBody();
         $obj_db = new DataBase();
 
         $selectUsers = "SELECT 
@@ -114,6 +110,15 @@ EOD;
         return json_encode($users);
     });
 
+    $app->get('/getRol', function(Request $request, Response $response, array $args){
+        $obj_db = new DataBase();
+
+        $selectRoles = "SELECT NomRol FROM appcondoc.tb_rol WHERE IdRol > 4";
+        $obj_db->query($selectRoles);
+        $roles = $obj_db->registers();
+        return json_encode($roles);
+    });
+
     $app->post('/userInsert', function(Request $request, Response $response, array $args){
         $data = $request->getParsedBody();
         $obj_db = new DataBase();
@@ -127,6 +132,7 @@ EOD;
         $imgUser = $data['foto'];
         $userName = $data['usuario'];
         $password = $data['password'];
+        $cargo = $data['cargo'];
 
         if($imgUser !== '' || $imgUser === null) {
 
@@ -155,13 +161,17 @@ EOD;
             $obj_db->query($selectColaborador);
             $result = $obj_db->register();
 
-            $insertUser = "INSERT INTO tb_usuarios (IdUsuario, Usuario, Password, IdColaborador, IdRol) VALUES (NULL, '$userName', '$password', $result->IdColaborador, 7)";
+            $insertUser = "INSERT INTO tb_usuarios (IdUsuario, Usuario, Password, IdColaborador, IdRol) VALUES (NULL, '$userName', '$password', $result->IdColaborador, $cargo)";
             $obj_db->query($insertUser);
             $obj_db->execute();
+
+            $response = Array (
+                "estado" => 'success',
+                "usuario" => $userName
+            );
         }
 
-        
-        return json_encode($insertUser);
+        return json_encode($response);
 
     });
 

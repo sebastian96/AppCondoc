@@ -20,9 +20,13 @@ export class Apiservice {
         const RESP = this.http.get<object>(this.backUrl.concat(ruta));
         return RESP;
     }
-
+    
+    listRol(ruta: string) {
+        const RESP = this.http.get<object>(this.backUrl.concat(ruta));
+        return RESP;
+    }
     insertUsers(ruta: string, data: any) {
-        const RESP = this.http.post<object>(this.backUrl.concat(ruta), data);
+        const RESP = this.http.post<any>(this.backUrl.concat(ruta), data);
         return RESP;
     }
 }

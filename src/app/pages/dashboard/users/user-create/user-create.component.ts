@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Apiservice } from '../../../../services/api.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-create',
@@ -16,15 +17,24 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     data: any;
     usersUsed: Array<any> = [];
     body: HTMLCollectionOf<HTMLBodyElement> = document.getElementsByTagName('body');
+    rol: object = [];
 
-    constructor( public Api: Apiservice) {
+    constructor( public Api: Apiservice, private router: Router) {
         this.body[0].style.overflowY = 'scroll';
+        this.Api.listRol('getRol').subscribe(
+            (response) => {
+                this.rol = response;
+            },
+            error => {
+                console.log(error);
+            }
+        )
     }
 
     ngOnInit() {
         this.form = new FormGroup({
-            nombres: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[A-Za-z]+')]),
-            apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[A-Za-z]+')]),
+            nombres: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]),
+            apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]),
             correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'), Validators.email], this.existUser.bind(this)),
             usuario: new FormControl('', Validators.required, this.existUser.bind(this)),
             foto: new FormControl('', ),
@@ -56,17 +66,27 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                 tipo: this.form.controls.tipo.value,
                 documento: this.form.controls.documento.value
             };
-            // console.log(datosUsuario);
             this.Api.insertUsers('userInsert', datosUsuario).subscribe(
                 (response) => {
-                    console.log(response);
+                    if (response.estado === 'success') {
+                        Swal.fire({
+                            title: `${response.usuario} Registrado`,
+                            type: 'success',
+                            animation: false,
+                            showConfirmButton: false,
+                            timer: 2500,
+                            customClass: {
+                                popup: 'animated bounceIn'
+                            }
+                        })
+                        this.router.navigate(['dashboard/users/listar']);
+                    }
                 },
                 error => {
-                    console.log(error.error.text);
+                    console.log(error);
                 }
             );
         } else {
-            console.log(this.form);
             Swal.fire({
                 title: 'Campos vacíos o incorrectos',
                 type: 'error',

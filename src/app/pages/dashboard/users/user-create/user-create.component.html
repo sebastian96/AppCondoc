@@ -128,17 +128,14 @@
                             <select class="form-control bg-dark text-light" formControlName="cargo">
                                 <option value="" hidden>seleccionar</option>
                                 <option value="1">Estudiante</option>
-                                <option value="2">Docente</option>
-                                <option value="3">Coordinador</option>
-                                <option value="4">Registro y control</option>
-                                <option value="5">Director</option>
+                                <option *ngFor="let item of rol;let i=index" value="{{i + 5}}">{{item.NomRol}}</option>
                             </select>
                             <div *ngIf="form.controls['cargo'].errors?.required">
                                 <strong class="text-danger fz-bold">* Seleccione un cargo</strong>
                             </div>
                         </div>
                     </div>
-                    <div class="col-12" *ngIf="form.controls['cargo'].value == 3 || form.controls['cargo'].value == 4 || form.controls['cargo'].value == 5">
+                    <div class="col-12" *ngIf="form.controls['cargo'].value == 5 || form.controls['cargo'].value == 6 || form.controls['cargo'].value == 7">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group">
@@ -177,7 +174,7 @@
                             <p class="mb-0">Aqui va el sensor de huellas</p>
                         </div>
                     </div>
-                    <div class="col-12" *ngIf="form.controls['cargo'].value == 2">
+                    <div class="col-12" *ngIf="form.controls['cargo'].value == 8">
                         <div class="alert alert-dismissible alert-danger">
                             <button type="button" class="close" data-dismiss="alert">&times;</button>
                             <h4 class="alert-heading">WARNING!</h4>
