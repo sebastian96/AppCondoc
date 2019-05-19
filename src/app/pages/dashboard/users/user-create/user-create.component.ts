@@ -70,11 +70,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                 (response) => {
                     if (response.estado === 'success') {
                         Swal.fire({
-                            title: `${response.usuario} Registrado`,
+                            title: `${response.usuario} Registrado con exito`,
                             type: 'success',
                             animation: false,
                             showConfirmButton: false,
-                            timer: 2500,
+                            timer: 1500,
                             customClass: {
                                 popup: 'animated bounceIn'
                             }

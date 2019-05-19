@@ -47,6 +47,11 @@ export class AuthService {
         return userToken;
     }
 
+    getLocalStorage(item: string) {
+        const data = localStorage.getItem(item);
+        return data;
+    }
+
     decode(token) {
         return decode(token);
     }

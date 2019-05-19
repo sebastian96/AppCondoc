@@ -11,29 +11,32 @@
         <div class="col">
             <h3>estudiantes</h3>
         </div>
-        <table class="table table-bordered table-sm mt-3 table-info table-striped">
-            <thead class="text-light text-center fz-bold fz-20">
+
+        <table class="mt-3 table table-bordered table-info table-responsive-lg table-sm table-striped">
+            <thead class="text-light text-center fz-bold fz-15">
                 <tr class="bg-dark">
-                    <td>Datos</td>
-                    <td>Datos</td>
-                    <td>Datos</td>
+                    <td>#</td>
+                    <td>Nombres</td>
+                    <td>Apellidos</td>
+                    <td>Correo</td>
+                    <td>Usuario</td>
+                    <td>Documento</td>
+                    <td>Editar</td>
                 </tr>
             </thead>
             <tbody class="text-primary text-center">
-                <tr>
-                    <td>Sebastian Miranda</td>
-                    <td>Sebastian Miranda</td>
-                    <td><button class="btn btn-info btn-sm" data-tooltip title="Editar Usuario"><i class="fas fa-edit text-light fz-15"></i></button></td>
-                </tr>
-                <tr>
-                    <td>Sebastian Miranda</td>
-                    <td>Sebastian Miranda</td>
-                    <td><button class="btn btn-info btn-sm" data-tooltip title="Editar Usuario"><i class="fas fa-edit text-light fz-15"></i></button></td>
-                </tr>
-                <tr>
-                    <td>Sebastian Miranda</td>
-                    <td>Sebastian Miranda</td>
-                    <td><button class="btn btn-info btn-sm" data-tooltip title="Editar Usuario"><i class="fas fa-edit text-light fz-15"></i></button></td>
+                <tr *ngFor="let user of users; let i = index">
+                    <td>{{i + 1}}</td>
+                    <td>{{user.NomColaborador}}</td>
+                    <td>{{user.ApeColaborador}}</td>
+                    <td>{{user.CorreoColaborador}}</td>
+                    <td>{{user.Usuario}}</td>
+                    <td>{{user.DocumentoColaborador}}</td>
+                    <td>
+                        <a [routerLink]="['../editar', user.Usuario]" class="btn btn-info btn-sm" (click)="saveLocalStorage(user.IdUsuario)">
+                            <i class="fas fa-edit text-light fz-15"></i>
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>

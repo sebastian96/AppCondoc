@@ -175,5 +175,27 @@ EOD;
 
     });
 
+    $app->get('/colaboradores', function(Request $request, Response $response, array $args){
+        $obj_db = new DataBase();
+
+        $selectUsers = "SELECT 
+                            tbCol.NomColaborador,
+                            tbCol.ApeColaborador,
+                            tbCol.CorreoColaborador,
+                            tbCol.DocumentoColaborador,
+                            tbCol.TipDocColaborador,
+                            tbCol.FotoColaborador,
+                            tbUsu.IdUsuario,
+                            tbUsu.Usuario
+                        FROM
+                            tb_colaboradores tbCol
+                            INNER JOIN
+                            tb_usuarios tbUsu ON tbUsu.IdColaborador = tbCol.IdColaborador
+                            WHERE tbUsu.IdRol NOT IN (4)";
+        $obj_db->query($selectUsers);
+        $users = $obj_db->registers();
+        return json_encode($users);
+    });
+
     $app->run();
 ?>
