@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-05-2019 a las 00:23:20
--- Versión del servidor: 10.1.34-MariaDB
--- Versión de PHP: 7.2.8
+-- Tiempo de generación: 22-05-2019 a las 04:50:03
+-- Versión del servidor: 10.1.38-MariaDB
+-- Versión de PHP: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -87,7 +87,21 @@ CREATE TABLE `tb_colaboradores` (
 INSERT INTO `tb_colaboradores` (`IdColaborador`, `NomColaborador`, `ApeColaborador`, `CorreoColaborador`, `TipDocColaborador`, `DocumentoColaborador`, `HuellaColaborador`, `FotoColaborador`) VALUES
 (1, 'Super', 'Administrador', 'super@admin.com', 'CC', '1548789525', '', ''),
 (3, 'sebastian', 'Miranda', 'arqcompu4@gmail.com', 'CC', '1018488631', NULL, 'C:/xampp/htdocs/AppCondoc/src/assets/img/users/gosick96/foto.png'),
-(4, 'juan', 'rojas', 'jrojas@books.com', 'CC', '1015848477', NULL, 'C:/xampp/htdocs/AppCondoc/dist/AppCondoc/assets/img/users/jrojas/foto.png');
+(4, 'juan', 'rojas', 'jrojas@books.com', 'CC', '1015848477', NULL, 'assets/img/users/jrojas/foto.png'),
+(5, 'sebastian', 'miranda', 'arqcompu4@gmail.com', 'CC', '1018488631', NULL, 'C:/xampp/htdocs/AppCondoc/dist/AppCondoc/assets/img/users/jmirandati/foto.png'),
+(6, 'sebastian', 'miranda', 'arqompu4@gmail.com', 'CC', '1018488631', NULL, 'C:/xampp/htdocs/AppCondoc/dist/AppCondoc/assets/img/users/jsmiranda/foto.png'),
+(7, 'sebastian', 'miranda', 'arqompu4@gmail.com', 'CC', '1018488631', NULL, 'C:/xampp/htdocs/AppCondoc/dist/AppCondoc/assets/img/users/jsmiranda/foto.png'),
+(8, 'david', 'moreno', 'dmoreno@books.com', 'CC', '456789528485', NULL, 'C:/xampp/htdocs/AppCondoc/dist/AppCondoc/assets/img/users/dmoreno/foto.png'),
+(9, 'belkis', 'tibaduiza galeano', 'belkistiba@hotmail.com', 'CC', '52339013', NULL, 'C:/xampp/htdocs/AppCondoc/dist/AppCondoc/assets/img/users/belkis/foto.png'),
+(10, 'javier', 'rios', 'javier@rios.com', 'CC', '569835269', NULL, 'C:/xampp/htdocs/AppCondoc/dist/AppCondoc/assets/img/users/javierRios/foto.png'),
+(11, 'manuel', 'manrique', 'jmata@gmail.com', 'CC', '102456985', NULL, 'assets/img/users/jmata/foto.png'),
+(12, 'santiago', 'lopez', 'lopez@hotmail.com', 'TI', '25366451', NULL, 'assets/img/users/lopez/foto.png'),
+(17, 'cristian', 'parra', 'cparra@gmail.com', 'TI', '8956232145', NULL, 'assets/img/users/cparra/foto.png'),
+(18, 'juan', 'rozo', 'rozo@gmail.com', 'TI', '963258741', NULL, 'assets/img/user.png'),
+(19, 'angie', 'velandia', 'angie@yahoo.com', 'TI', '963525758', NULL, 'assets/img/user.png'),
+(20, 'laura', 'albao', 'laura@hotmail.es', 'TI', '96589597', NULL, 'assets/img/users/laura/foto.png'),
+(21, 'natalia', 'miranda', 'natalia@gmail.com', 'CC', '963214584', NULL, 'assets/img/users/natMiranda/foto.png'),
+(22, 'luisa', 'tibaduiza', 'luisa@hotmail.com', 'CC', '563298741', NULL, 'assets/img/users/luisa96/foto.png');
 
 -- --------------------------------------------------------
 
@@ -239,7 +253,21 @@ CREATE TABLE `tb_usuarios` (
 INSERT INTO `tb_usuarios` (`IdUsuario`, `Usuario`, `Password`, `IdColaborador`, `IdRol`) VALUES
 (1, 'admin', '123456', 1, 4),
 (3, 'gosick96', '123456', 3, 7),
-(4, 'jrojas', '123456', 4, 7);
+(4, 'jrojas', '123456', 4, 7),
+(5, 'jmirandati', '123456', 3, 7),
+(6, 'jsmiranda', '123456', 3, 5),
+(7, 'jsmiranda', '123456', 3, 5),
+(8, 'dmoreno', '123456', 8, 7),
+(9, 'belkis', '123456', 9, 7),
+(10, 'javierRios', '123456', 10, 7),
+(11, 'jmata', '123456', 11, 6),
+(12, 'lopez', '123456', 12, 6),
+(17, 'cparra', '123456', 17, 6),
+(18, 'rozo', '123456', 18, 6),
+(19, 'angie', '123456', 19, 6),
+(20, 'laura', '123456', 20, 6),
+(21, 'natMiranda', '123456', 21, 7),
+(22, 'luisa96', '123456', 22, 5);
 
 --
 -- Índices para tablas volcadas
@@ -361,7 +389,7 @@ ALTER TABLE `tb_calendario`
 -- AUTO_INCREMENT de la tabla `tb_colaboradores`
 --
 ALTER TABLE `tb_colaboradores`
-  MODIFY `IdColaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdColaborador` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_curso`
@@ -415,7 +443,7 @@ ALTER TABLE `tb_salones`
 -- AUTO_INCREMENT de la tabla `tb_usuarios`
 --
 ALTER TABLE `tb_usuarios`
-  MODIFY `IdUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Restricciones para tablas volcadas
