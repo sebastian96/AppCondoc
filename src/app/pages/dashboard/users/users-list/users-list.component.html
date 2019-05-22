@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 pb-80">
     <div class="bg-primary d-flex justify-content-between p-4 row">
         <div class="col col-12 col-md-9">
             <h3 class="text-light">Lista de usuarios</h3>
@@ -21,19 +21,21 @@
                     <td>Correo</td>
                     <td>Usuario</td>
                     <td>Documento</td>
+                    <td>Rol</td>
                     <td>Editar</td>
                 </tr>
             </thead>
             <tbody class="text-primary text-center">
                 <tr *ngFor="let user of users; let i = index">
                     <td>{{i + 1}}</td>
-                    <td>{{user.NomColaborador}}</td>
-                    <td>{{user.ApeColaborador}}</td>
-                    <td>{{user.CorreoColaborador}}</td>
-                    <td>{{user.Usuario}}</td>
-                    <td>{{user.DocumentoColaborador}}</td>
+                    <td>{{user['NomColaborador']}}</td>
+                    <td>{{user['ApeColaborador']}}</td>
+                    <td>{{user['CorreoColaborador']}}</td>
+                    <td>{{user['Usuario']}}</td>
+                    <td>{{user['DocumentoColaborador']}}</td>
+                    <td>{{user['NomRol']}}</td>
                     <td>
-                        <a [routerLink]="['../editar', user.Usuario]" class="btn btn-info btn-sm" (click)="saveLocalStorage(user.IdUsuario)">
+                        <a [routerLink]="['../editar', user['Usuario']]" class="btn btn-info btn-sm" (click)="saveLocalStorage(user.IdUsuario)">
                             <i class="fas fa-edit text-light fz-15"></i>
                         </a>
                     </td>

@@ -11,29 +11,31 @@ import { element } from 'protractor';
 export class UsersListComponent implements OnInit {
 
     users: Array<object> = [];
+    body: HTMLCollectionOf<HTMLBodyElement> = document.getElementsByTagName('body');
 
-    constructor(private api: Apiservice, private router: Router) { }
+    constructor(private api: Apiservice, private router: Router) { 
+        this.body[0].style.overflowY = 'scroll';
+    }
 
     ngOnInit() {
         this.api.getColaboradores('colaboradores').subscribe(
             (response) => {
                 this.users = response;
-                console.log(this.users);
             },
             error => {
                 console.log(error);
-            }
-            )
+            });
         }
         
     saveLocalStorage(idUser: number) {     
         this.users.forEach(element => {
             if (element['IdUsuario'] === idUser) {
                 localStorage.setItem('userEdit', JSON.stringify(element));
-                return element;
             }
         });
     }
 
-
+    ngOnDestroy(): void {
+        this.body[0].style.overflowY = 'hidden';
+    }
 }

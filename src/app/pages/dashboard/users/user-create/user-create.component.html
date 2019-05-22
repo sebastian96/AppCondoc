@@ -100,9 +100,6 @@
                                     <label class="custom-control-label btn btn-dark btn-sm" for="check2">Tarjeta de identidad</label>
                                 </div>
                             </div>
-                            <div *ngIf="form.controls['tipo'].errors?.required">
-                                <strong class="text-danger fz-bold">* Seleccione un tipo de documento</strong>
-                            </div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6">
@@ -130,9 +127,6 @@
                                 <option value="1">Estudiante</option>
                                 <option *ngFor="let item of rol;let i=index" value="{{i + 5}}">{{item.NomRol}}</option>
                             </select>
-                            <div *ngIf="form.controls['cargo'].errors?.required">
-                                <strong class="text-danger fz-bold">* Seleccione un cargo</strong>
-                            </div>
                         </div>
                     </div>
                     <div class="col-12" *ngIf="form.controls['cargo'].value == 5 || form.controls['cargo'].value == 6 || form.controls['cargo'].value == 7">

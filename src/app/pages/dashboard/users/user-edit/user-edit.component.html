@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-5 pb-80">
     <div class="row bg-primary d-flex justify-content-between p-4">
         <div class="col col-12 col-md-9">
             <h3 class="text-light">Editar usuario</h3>
@@ -84,8 +84,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 box-fixed align-items-center d-flex justify-content-center box-fixed">
-                        <img *ngIf="form.controls['foto'].value" [src]="url" alt="imageUser" class="img-fluid w-50 h-75 mb-3">
-                        <img *ngIf="!form.controls['foto'].value" src="../../../../../assets/img/users/gosick96/foto.png" alt="imageUser" class="img-fluid w-50 h-75 mb-3">
+                        <img *ngIf="!form.controls['foto'].value" [src]="url" alt="imageUser" class="img-fluid w-50 h-75 mb-3">
                     </div>
                     <div class="col-12 col-sm-12 col-md-6">
                         <div class="form-group">

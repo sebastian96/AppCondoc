@@ -37,7 +37,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]),
             correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'), Validators.email], this.existUser.bind(this)),
             usuario: new FormControl('', Validators.required, this.existUser.bind(this)),
-            foto: new FormControl('', ),
+            foto: new FormControl(''),
             tipo: new FormControl('', Validators.required),
             documento: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')], this.existUser.bind(this)),
             cargo: new FormControl('', Validators.required),
@@ -70,7 +70,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                 (response) => {
                     if (response.estado === 'success') {
                         Swal.fire({
-                            title: `${response.usuario} Registrado con exito`,
+                            title: `${response.usuario} Registrad@ con exito`,
                             type: 'success',
                             animation: false,
                             showConfirmButton: false,
@@ -104,7 +104,6 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         if (event.target.files && event.target.files[0]) {
             const reader = new FileReader();
             reader.readAsDataURL(event.target.files[0]);
-            // tslint:disable-next-line: no-shadowed-variable
             reader.onload = (event) => {
                 this.url = event.target['result'];
             };
