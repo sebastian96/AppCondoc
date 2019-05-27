@@ -134,7 +134,7 @@ EOD;
         $password = $data['password'];
         $cargo = $data['cargo'];
 
-        if($imgUser !== '' || $imgUser === null) {
+        if($imgUser !== '' || $imgUser !== null) {
 
             list(, $imgUser) = explode(';', $imgUser);
             list(, $imgUser) = explode(',', $imgUser);
@@ -162,14 +162,36 @@ EOD;
             $result = $obj_db->register();
 
             $insertUser = "INSERT INTO tb_usuarios (IdUsuario, Usuario, Password, IdColaborador, IdRol) VALUES (NULL, '$userName', '$password', $result->IdColaborador, $cargo)";
-            $obj_db->query($insertUser);
-            $obj_db->execute();
 
             $response = Array (
                 "estado" => 'success',
                 "usuario" => $userName
             );
+        } else if ($imgUser === '' || $imgUser === null) {
+            $insertColaborador = "INSERT INTO tb_colaboradores (IdColaborador, NomColaborador, ApeColaborador, CorreoColaborador, TipDocColaborador, DocumentoColaborador, HuellaColaborador, FotoColaborador) VALUES (NULL, '$nombres', '$apellidos', '$correo', '$tipDoc', '$documento', NULL, NULL)";
+
+            $obj_db->query($insertColaborador);
+            $obj_db->execute();
+
+            $selectColaborador = "SELECT IdColaborador FROM tb_colaboradores WHERE DocumentoColaborador = '$documento'";
+            $obj_db->query($selectColaborador);
+            $result = $obj_db->register();
+
+            $insertUser = "INSERT INTO tb_usuarios (IdUsuario, Usuario, Password, IdColaborador, IdRol) VALUES (NULL, '$userName', '$password', $result->IdColaborador, $cargo)";
+
+            $response = Array (
+                "estado" => 'success',
+                "usuario" => $userName
+            );
+        } else {
+            $response = Array (
+                "estado" => 'error',
+                "usuario" => $userName
+            );
         }
+
+        $obj_db->query($insertUser);
+        $obj_db->execute();
 
         return json_encode($response);
 

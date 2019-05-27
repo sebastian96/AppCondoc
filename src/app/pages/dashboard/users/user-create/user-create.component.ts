@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
 import { Apiservice } from '../../../../services/api.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -19,7 +19,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     body: HTMLCollectionOf<HTMLBodyElement> = document.getElementsByTagName('body');
     rol: object = [];
 
-    constructor( public Api: Apiservice, private router: Router) {
+    constructor( public Api: Apiservice, private router: Router, private fb: FormBuilder) {
         this.body[0].style.overflowY = 'scroll';
         this.Api.listRol('getRol').subscribe(
             (response) => {
@@ -28,21 +28,29 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             error => {
                 console.log(error);
             }
-        )
+        );
+        this.Api.listUsers('getUsers').subscribe(
+            (Response: Array<any>) => {
+                this.usersUsed = Response;
+            },
+            err => {
+                console.log(err);
+            }
+        );
     }
 
     ngOnInit() {
-        this.form = new FormGroup({
-            nombres: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]),
-            apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]),
-            correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'), Validators.email], this.existUser.bind(this)),
-            usuario: new FormControl('', Validators.required, this.existUser.bind(this)),
-            foto: new FormControl('', ),
-            tipo: new FormControl('', Validators.required),
-            documento: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')], this.existUser.bind(this)),
-            cargo: new FormControl('', Validators.required),
-            password1: new FormControl('', Validators.required),
-            password2: new FormControl()
+        this.form = this.fb.group({
+            nombres: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]],
+            apellidos: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]],
+            correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')], this.existUser.bind(this)],
+            usuario: ['', Validators.required, this.existUser.bind(this)],
+            foto: ['', ],
+            tipo: ['', Validators.required],
+            documento: ['', [Validators.required, Validators.pattern('[0-9]+')]],
+            cargo: ['', Validators.required],
+            password1: ['', Validators.required],
+            password2: []
         });
 
         this.form.controls.password2.setValidators([
@@ -87,6 +95,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                 }
             );
         } else {
+            console.log(this.form);
             Swal.fire({
                 title: 'Campos vacíos o incorrectos',
                 type: 'error',
@@ -122,26 +131,26 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         return null;
     }
 
-    existUser( control: FormControl ): Promise<any>|Observable<any> {
-        const PROMESA = new Promise(
+    existUser( control: AbstractControl ): Promise<any> | Observable<any> {
+        // console.log(this.usersUsed);
+        const PROMISE = new Promise(
             ( resolve, reject ) => {
-                this.Api.listUsers('getUsers').subscribe(
-                    (Response: Array<any>) => {
-                        Response.map((dato) => {
-                            if (control.value === dato.Usuario || control.value === dato.CorreoColaborador || control.value === dato.DocumentoColaborador) {
-                                resolve({ existe: true });
-                            } else {
-                                resolve(null);
-                            }
-                        });
-                    },
-                    err => {
-                        console.log(err);
+                this.usersUsed.map(value => {
+                    console.log(value.Usuario);
+                    if (control.value === value.Usuario) {
+                        console.log(control.value);
+                        resolve({ existe: true });
+                    } else {
+                        resolve(null);
                     }
-                );
+                });
+                // control.valueChanges.subscribe(
+                //     (control.value) => {
+                //     }
+                // );
             }
         );
-        return PROMESA;
+        return PROMISE;
     }
 
     ngOnDestroy(): void {
