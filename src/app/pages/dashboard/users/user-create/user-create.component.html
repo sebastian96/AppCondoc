@@ -4,7 +4,8 @@
             <h3 class="text-light">FORMULARIO DE REGISTRO</h3>
         </div>
         <div class="col col-12 col-md-3">
-            <a [routerLink]="['../listar']" routerLinkActive="router-link-active" class="btn btn-outline-light btn-sm btn-block">Regresar</a>
+            <a [routerLink]="['../listar']" routerLinkActive="router-link-active"
+                class="btn btn-outline-light btn-sm btn-block">Regresar</a>
         </div>
     </div>
     <div class="row">
@@ -14,7 +15,8 @@
                     <div class="col-12 col-sm-12 col-md-6 ">
                         <div class="form-group">
                             <label class="text-primary fz-bold" for="name">Nombres</label>
-                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese nombres" formControlName="nombres">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese nombres"
+                                formControlName="nombres">
                             <div *ngIf="form.controls['nombres'].touched">
                                 <div *ngIf="form.controls['nombres'].errors?.required">
                                     <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -31,7 +33,8 @@
                     <div class="col-12 col-sm-12 col-md-6 ">
                         <div class="form-group ">
                             <label class="text-primary fz-bold" for="name">Apellidos</label>
-                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese apellidos" formControlName="apellidos">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese apellidos"
+                                formControlName="apellidos">
                             <div *ngIf="form.controls['apellidos'].touched">
                                 <div *ngIf="form.controls['apellidos'].errors?.required">
                                     <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -48,13 +51,15 @@
                     <div class="col-12 col-sm-12 col-md-6 ">
                         <div class="form-group ">
                             <label class="text-primary fz-bold" for="name">Correo</label>
-                            <input type="email" class="form-control bg-dark text-light" placeholder="Ingrese correo" formControlName="correo">
+                            <input type="email" class="form-control bg-dark text-light" placeholder="Ingrese correo"
+                                formControlName="correo">
                             <div *ngIf="form.controls['correo'].touched">
                                 <div *ngIf="form.controls['correo'].errors?.required">
                                     <strong class="text-danger fz-bold">* Este campo es requerido</strong>
                                 </div>
                             </div>
-                            <div *ngIf="form.controls['correo'].errors?.pattern || form.controls['correo'].errors?.email">
+                            <div
+                                *ngIf="form.controls['correo'].errors?.pattern || form.controls['correo'].errors?.email">
                                 <strong class="text-danger fz-bold">* Ingrese un correo valido</strong>
                             </div>
                             <div *ngIf="form.controls['correo'].errors?.existe">
@@ -65,7 +70,8 @@
                     <div class="col-12 col-sm-12 col-md-6 ">
                         <div class="form-group ">
                             <label class="text-primary fz-bold" for="name">Usuario</label>
-                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese usuario" formControlName="usuario">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese usuario"
+                                formControlName="usuario">
                             <div *ngIf="form.controls['usuario'].touched">
                                 <div *ngIf="form.controls['usuario'].errors?.required">
                                     <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -78,26 +84,35 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 align-items-center d-flex box-fixed">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="file" accept="image/jpg, image/png" formControlName="foto" (change)="previewImage($event)">
-                            <label class="custom-file-label bg-dark text-light" for="file" *ngIf="!form.controls['foto'].value">Seleccione una foto</label>
-                            <label class="custom-file-label bg-dark text-light" for="file" *ngIf="form.controls['foto'].value">Cambiar foto</label>
+                            <input type="file" class="custom-file-input" id="file" accept="image/jpg, image/png"
+                                formControlName="foto" (change)="previewImage($event)">
+                            <label class="custom-file-label bg-dark text-light" for="file"
+                                *ngIf="!form.controls['foto'].value">Seleccione una foto</label>
+                            <label class="custom-file-label bg-dark text-light" for="file"
+                                *ngIf="form.controls['foto'].value">Cambiar foto</label>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 box-fixed align-items-center d-flex justify-content-center box-fixed">
-                        <img *ngIf="form.controls['foto'].value" [src]="url" alt="imageUser" class="img-fluid w-50 h-75 mb-3">
-                        <img *ngIf="!form.controls['foto'].value" src="assets/img/user.png" alt="imageUser" class="img-fluid w-50 h-75 mb-3">
+                        <img *ngIf="form.controls['foto'].value" [src]="url" alt="imageUser"
+                            class="img-fluid w-50 h-75 mb-3">
+                        <img *ngIf="!form.controls['foto'].value" src="assets/img/user.png" alt="imageUser"
+                            class="img-fluid w-50 h-75 mb-3">
                     </div>
                     <div class="col-12 col-sm-12 col-md-6">
                         <div class="form-group">
                             <label class="text-primary fz-bold mb-sm-2" for="name">Tipo de documento</label>
                             <div class="d-flex">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" id="check1" value="CC" formControlName="tipo">
-                                    <label class="custom-control-label btn btn-dark btn-sm" for="check1">Cedula de ciudadania</label>
+                                    <input type="radio" class="custom-control-input" id="check1" value="CC"
+                                        formControlName="tipo">
+                                    <label class="custom-control-label btn btn-dark btn-sm" for="check1">Cedula de
+                                        ciudadania</label>
                                 </div>
                                 <div class="custom-control custom-radio ml-1">
-                                    <input type="radio" class="custom-control-input" id="check2" value="TI" formControlName="tipo">
-                                    <label class="custom-control-label btn btn-dark btn-sm" for="check2">Tarjeta de identidad</label>
+                                    <input type="radio" class="custom-control-input" id="check2" value="TI"
+                                        formControlName="tipo">
+                                    <label class="custom-control-label btn btn-dark btn-sm" for="check2">Tarjeta de
+                                        identidad</label>
                                 </div>
                             </div>
                         </div>
@@ -105,7 +120,8 @@
                     <div class="col-12 col-sm-12 col-md-6">
                         <div class="form-group">
                             <label class="text-primary fz-bold" for="name">Documento</label>
-                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese documento" formControlName="documento">
+                            <input type="text" class="form-control bg-dark text-light" placeholder="Ingrese documento"
+                                formControlName="documento">
                             <div *ngIf="form.controls['documento'].touched">
                                 <div *ngIf="form.controls['documento'].errors?.required">
                                     <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -129,12 +145,14 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-12" *ngIf="form.controls['cargo'].value == 5 || form.controls['cargo'].value == 6 || form.controls['cargo'].value == 7">
+                    <div class="col-12"
+                        *ngIf="form.controls['cargo'].value == 5 || form.controls['cargo'].value == 6 || form.controls['cargo'].value == 7">
                         <div class="row">
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <label class="text-primary fz-bold" for="name">Contraseña</label>
-                                    <input type="password" class="form-control bg-dark text-light" placeholder="Ingrese contraseña" formControlName="password1">
+                                    <input type="password" class="form-control bg-dark text-light"
+                                        placeholder="Ingrese contraseña" formControlName="password1">
                                     <div *ngIf="form.controls['password1'].touched">
                                         <div *ngIf="form.controls['password1'].errors?.required">
                                             <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -148,7 +166,8 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <label class="text-primary fz-bold" for="name">Confirmar contraseña</label>
-                                    <input type="password" class="form-control bg-dark text-light " placeholder="Ingrese nuevamente la contraseña" formControlName="password2">
+                                    <input type="password" class="form-control bg-dark text-light "
+                                        placeholder="Ingrese nuevamente la contraseña" formControlName="password2">
                                     <div *ngIf="form.controls['password2'].touched">
                                         <div *ngIf="form.controls['password2'].errors?.required">
                                             <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -178,7 +197,8 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <label class="text-primary fz-bold" for="name">Contraseña</label>
-                                    <input type="password" class="form-control bg-dark text-light" placeholder="Ingrese contraseña" formControlName="password1">
+                                    <input type="password" class="form-control bg-dark text-light"
+                                        placeholder="Ingrese contraseña" formControlName="password1">
                                     <div *ngIf="form.controls['password1'].touched">
                                         <div *ngIf="form.controls['password1'].errors?.required">
                                             <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -192,7 +212,8 @@
                             <div class="col-12 col-sm-12 col-md-6">
                                 <div class="form-group">
                                     <label class="text-primary fz-bold" for="name">Confirmar contraseña</label>
-                                    <input type="password" class="form-control bg-dark text-light " placeholder="Ingrese nuevamente la contraseña" formControlName="password2">
+                                    <input type="password" class="form-control bg-dark text-light "
+                                        placeholder="Ingrese nuevamente la contraseña" formControlName="password2">
                                     <div *ngIf="form.controls['password2'].touched">
                                         <div *ngIf="form.controls['password2'].errors?.required">
                                             <strong class="text-danger fz-bold">* Este campo es requerido</strong>
@@ -206,7 +227,8 @@
                         </div>
                     </div>
                     <div class="col-12 offset-3 mt-4">
-                        <input [ngClass]="{'disabled': !form.valid}" type="submit" class="btn btn-info w-50" value="Registrar">
+                        <input [ngClass]="{'disabled': !form.valid}" type="submit" class="btn btn-info w-50"
+                            value="Registrar">
                     </div>
                 </div>
             </form>

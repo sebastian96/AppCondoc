@@ -4,43 +4,46 @@
             <h3 class="text-light">Lista de usuarios</h3>
         </div>
         <div class="col col-12 col-md-3">
-            <a [routerLink]="['../nuevo']" routerLinkActive="router-link-active" class="btn btn-outline-light btn-sm btn-block">Crear Usuario</a>
+            <a [routerLink]="['../nuevo']" routerLinkActive="router-link-active"
+                class="btn btn-outline-light btn-sm btn-block">Crear Usuario</a>
         </div>
     </div>
-    <div class="row mt-5 box-shadow p-4 bg-light">
-        <div class="col">
-            <h3>estudiantes</h3>
-        </div>
+    <div class="example-header">
+        <mat-form-field>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+    </div>
 
-        <table class="mt-3 table table-bordered table-info table-responsive-lg table-sm table-striped">
-            <thead class="text-light text-center fz-bold fz-15">
-                <tr class="bg-dark">
-                    <td>#</td>
-                    <td>Nombres</td>
-                    <td>Apellidos</td>
-                    <td>Correo</td>
-                    <td>Usuario</td>
-                    <td>Documento</td>
-                    <td>Rol</td>
-                    <td>Editar</td>
-                </tr>
-            </thead>
-            <tbody class="text-primary text-center">
-                <tr *ngFor="let user of users; let i = index">
-                    <td>{{i + 1}}</td>
-                    <td>{{user['NomColaborador']}}</td>
-                    <td>{{user['ApeColaborador']}}</td>
-                    <td>{{user['CorreoColaborador']}}</td>
-                    <td>{{user['Usuario']}}</td>
-                    <td>{{user['DocumentoColaborador']}}</td>
-                    <td>{{user['NomRol']}}</td>
-                    <td>
-                        <a [routerLink]="['../editar', user['Usuario']]" class="btn btn-info btn-sm" (click)="saveLocalStorage(user.IdUsuario)">
-                            <i class="fas fa-edit text-light fz-15"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="example-container mat-elevation-z8">
+
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="names">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nombres y apellidos </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.NomColaborador}}  {{row.ApeColaborador}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Correo">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Correo </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.CorreoColaborador}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Documento">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Documento </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.DocumentoColaborador}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="Editar">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Editar </mat-header-cell>
+                <mat-cell *matCellDef="let row"> <i class="fas fa-edit"></i> </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
     </div>
 </div>

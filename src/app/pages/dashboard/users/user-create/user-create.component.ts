@@ -110,7 +110,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
           }
     }
 
-    different( control: FormControl): { [s: string]: boolean } {
+    different( control: FormControl ): { [s: string]: boolean } {
         const FORMA: any = this;
 
         if ( control.value !== FORMA.controls.password1.value) {
@@ -146,6 +146,5 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.body[0].style.overflowY = 'hidden';
     }
-
 
 }

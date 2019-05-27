@@ -7,18 +7,21 @@ import { UsersComponent } from './users.component';
 import { UsersRoutingModule } from './users-routing.module';
 import { UserCreateComponent } from './user-create/user-create.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { MaterialModule } from '../material/material.module';
 
 @NgModule({
-  declarations: [
-    UsersComponent, 
-    UsersListComponent, 
-    UserCreateComponent, UserEditComponent
-  ],
-  imports: [
-    CommonModule,
-    UsersRoutingModule,
-    FormsModule,
-    ReactiveFormsModule
-  ]
+    declarations: [
+        UsersComponent,
+        UsersListComponent,
+        UserCreateComponent,
+        UserEditComponent
+    ],
+    imports: [
+        CommonModule,
+        UsersRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule
+    ]
 })
-export class UsersModule {}
+export class UsersModule { }
