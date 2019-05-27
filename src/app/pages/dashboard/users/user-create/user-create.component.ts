@@ -40,17 +40,17 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.form = this.fb.group({
-            nombres: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]],
-            apellidos: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]],
-            correo: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')], this.existUser.bind(this)],
-            usuario: ['', Validators.required, this.existUser.bind(this)],
-            foto: ['', ],
-            tipo: ['', Validators.required],
-            documento: ['', [Validators.required, Validators.pattern('[0-9]+')]],
-            cargo: ['', Validators.required],
-            password1: ['', Validators.required],
-            password2: []
+        this.form = new FormGroup({
+            nombres: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]),
+            apellidos: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z]+( +[a-zA-Z]+)*')]),
+            correo: new FormControl('', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$'), Validators.email], this.existUser.bind(this)),
+            usuario: new FormControl('', Validators.required, this.existUser.bind(this)),
+            foto: new FormControl(''),
+            tipo: new FormControl('', Validators.required),
+            documento: new FormControl('', [Validators.required, Validators.pattern('[0-9]+')], this.existUser.bind(this)),
+            cargo: new FormControl('', Validators.required),
+            password1: new FormControl('', Validators.required),
+            password2: new FormControl()
         });
 
         this.form.controls.password2.setValidators([
@@ -78,11 +78,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                 (response) => {
                     if (response.estado === 'success') {
                         Swal.fire({
-                            title: `${response.usuario} Registrado`,
+                            title: `${response.usuario} Registrad@ con exito`,
                             type: 'success',
                             animation: false,
                             showConfirmButton: false,
-                            timer: 2500,
+                            timer: 1500,
                             customClass: {
                                 popup: 'animated bounceIn'
                             }
@@ -113,14 +113,13 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         if (event.target.files && event.target.files[0]) {
             const reader = new FileReader();
             reader.readAsDataURL(event.target.files[0]);
-            // tslint:disable-next-line: no-shadowed-variable
             reader.onload = (event) => {
                 this.url = event.target['result'];
             };
           }
     }
 
-    different( control: FormControl): { [s: string]: boolean } {
+    different( control: FormControl ): { [s: string]: boolean } {
         const FORMA: any = this;
 
         if ( control.value !== FORMA.controls.password1.value) {
@@ -144,10 +143,6 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                         resolve(null);
                     }
                 });
-                // control.valueChanges.subscribe(
-                //     (control.value) => {
-                //     }
-                // );
             }
         );
         return PROMISE;
@@ -156,6 +151,5 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.body[0].style.overflowY = 'hidden';
     }
-
 
 }

@@ -1,41 +1,54 @@
-<div class="container mt-5">
+<div class="container mt-5 pb-80">
     <div class="bg-primary d-flex justify-content-between p-4 row">
         <div class="col col-12 col-md-9">
             <h3 class="text-light">Lista de usuarios</h3>
         </div>
         <div class="col col-12 col-md-3">
-            <a [routerLink]="['../nuevo']" routerLinkActive="router-link-active" class="btn btn-outline-light btn-sm btn-block">Crear Usuario</a>
+            <a [routerLink]="['../nuevo']" routerLinkActive="router-link-active"
+                class="btn btn-outline-light btn-sm btn-block">Crear Usuario</a>
         </div>
     </div>
-    <div class="row mt-5 box-shadow p-4 bg-light">
-        <div class="col">
-            <h3>estudiantes</h3>
+    <div class="bg-light box-shadow mt-5 row">
+        <div class="col-12 mt-2">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Buscar">
+            </mat-form-field>
         </div>
-        <table class="table table-bordered table-sm mt-3 table-info table-striped">
-            <thead class="text-light text-center fz-bold fz-20">
-                <tr class="bg-dark">
-                    <td>Datos</td>
-                    <td>Datos</td>
-                    <td>Datos</td>
-                </tr>
-            </thead>
-            <tbody class="text-primary text-center">
-                <tr>
-                    <td>Sebastian Miranda</td>
-                    <td>Sebastian Miranda</td>
-                    <td><button class="btn btn-info btn-sm" data-tooltip title="Editar Usuario"><i class="fas fa-edit text-light fz-15"></i></button></td>
-                </tr>
-                <tr>
-                    <td>Sebastian Miranda</td>
-                    <td>Sebastian Miranda</td>
-                    <td><button class="btn btn-info btn-sm" data-tooltip title="Editar Usuario"><i class="fas fa-edit text-light fz-15"></i></button></td>
-                </tr>
-                <tr>
-                    <td>Sebastian Miranda</td>
-                    <td>Sebastian Miranda</td>
-                    <td><button class="btn btn-info btn-sm" data-tooltip title="Editar Usuario"><i class="fas fa-edit text-light fz-15"></i></button></td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="col-12">
+    
+            <mat-table [dataSource]="dataSource" matSort>
+    
+                <ng-container matColumnDef="names">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Nombres y apellidos </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="text-center"> {{row.NomColaborador}} {{row.ApeColaborador}}</mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="Correo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Correo </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="text-center"> {{row.CorreoColaborador}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="usuario">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Usuario </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="text-center"> {{row.Usuario}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="Documento">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Documento </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="text-center"> {{row.TipDocColaborador}} - {{row.DocumentoColaborador}} </mat-cell>
+                </ng-container>
+    
+                <ng-container matColumnDef="Editar">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Editar </mat-header-cell>
+                    <mat-cell *matCellDef="let row" class="text-center"> <a [routerLink]="['../editar', row.IdUsuario]" routerLinkActive="router-link-active" (click)="saveUserStorage(row.IdUsuario)" class="btn btn-sm bg-success text-dark"><i class="fas fa-edit fz-20"></i></a> </mat-cell>
+                </ng-container>
+    
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+    
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        </div>
     </div>
+
 </div>

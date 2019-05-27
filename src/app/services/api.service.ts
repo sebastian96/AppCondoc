@@ -25,8 +25,14 @@ export class Apiservice {
         const RESP = this.http.get<object>(this.backUrl.concat(ruta));
         return RESP;
     }
+
     insertUsers(ruta: string, data: any) {
         const RESP = this.http.post<any>(this.backUrl.concat(ruta), data);
+        return RESP;
+    }
+
+    getColaboradores(ruta: string) {
+        const RESP = this.http.get<any>(this.backUrl.concat(ruta));
         return RESP;
     }
 }

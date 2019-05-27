@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 body {
     font-family: 'Open Sans', sans-serif !important;
     overflow: hidden;
@@ -39,40 +41,6 @@ body {
     box-shadow: 0 0 15px #2C3E50;
 }
 
-[data-tooltip] {
-    &:before {
-        content: '';
-        opacity: 0;
-    }
-    &:hover {
-        &:before,
-        &:after {
-            transition: all 200ms ease;
-            display: block;
-            position: absolute;
-            font-size: 0.8em;
-            color: white;
-        }
-        &:before {
-            content: attr(title);
-            background-color: rgba(0, 0, 0, 0.9);
-            margin-top: -3.5em;
-            margin-left: -45px;
-            padding: 0.5em;
-            opacity: 1;
-        }
-        &:after {
-            content: '';
-            margin-top: -2.5em;
-            margin-left: 0.5em;
-            border-style: solid;
-            border-color: transparent;
-            border-top-color: rgba(0, 0, 0, 0.9);
-            border-width: 0.5em 0.5em 0 0.5em;
-        }
-    }
-}
-
 .custom-file-label {
     cursor: pointer;
     &:after {
@@ -91,13 +59,6 @@ body {
     display: none;
 }
 
-footer {
-    color: #fff;
-    bottom: 0px;
-    width: 100%;
-    display: none;
-}
-
 .disabled {
     cursor: not-allowed !important;
 }
@@ -105,4 +66,15 @@ footer {
 .box-fixed {
     min-height: 230px;
     max-height: 230px;
+}
+
+.btn {
+    cursor: pointer;
+}
+
+footer {
+    color: #fff;
+    bottom: 0px;
+    width: 100%;
+    display: none;
 }
