@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, AbstractControl, FormBuilder } from '@angular/forms';
 import { Apiservice } from '../../../../services/api.service';
 import { Observable } from 'rxjs';
 import Swal from 'sweetalert2';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-user-create',
@@ -77,17 +77,19 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             this.Api.insertUsers('userInsert', datosUsuario).subscribe(
                 (response) => {
                     if (response.estado === 'success') {
-                        Swal.fire({
-                            title: `${response.usuario} Registrad@ con exito`,
-                            type: 'success',
-                            animation: false,
-                            showConfirmButton: false,
-                            timer: 1500,
-                            customClass: {
-                                popup: 'animated bounceIn'
-                            }
-                        })
-                        this.router.navigate(['dashboard/users/listar']);
+                        setTimeout(() => {
+                            Swal.fire({
+                                title: `${response.usuario} Registrado/a con exito`,
+                                type: 'success',
+                                animation: false,
+                                showConfirmButton: false,
+                                timer: 1500,
+                                customClass: {
+                                    popup: 'animated bounceIn'
+                                }
+                            })
+                            this.router.navigate(['dashboard/users/listar']);
+                        }, 1000);
                     }
                 },
                 error => {
@@ -95,7 +97,6 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                 }
             );
         } else {
-            console.log(this.form);
             Swal.fire({
                 title: 'Campos vacíos o incorrectos',
                 type: 'error',
@@ -131,13 +132,11 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     }
 
     existUser( control: AbstractControl ): Promise<any> | Observable<any> {
-        // console.log(this.usersUsed);
+
         const PROMISE = new Promise(
             ( resolve, reject ) => {
                 this.usersUsed.map(value => {
-                    console.log(value.Usuario);
                     if (control.value === value.Usuario) {
-                        console.log(control.value);
                         resolve({ existe: true });
                     } else {
                         resolve(null);

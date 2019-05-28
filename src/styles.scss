@@ -72,6 +72,27 @@ body {
     cursor: pointer;
 }
 
+mat-header-row {
+    background: #343a40 ;
+}
+.cdk-column-Id {
+    flex: 0 0 65px;
+}
+.cdk-column-Correo {
+    flex: 0 0 200px;
+}
+.cdk-column-usuario {
+    flex: 0 0 120px;
+}
+.cdk-column-Cargo {
+    flex: 0 0 120px;
+}
+.mat-row {
+    &:hover {
+        background: rgba( #1F9BCF, 0.35);
+        box-shadow: 0px 0px 10px 0px rgba(#000, 0.3);
+    }
+}
 footer {
     color: #fff;
     bottom: 0px;

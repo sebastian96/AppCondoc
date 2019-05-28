@@ -17,32 +17,45 @@
         <div class="col-12">
     
             <mat-table [dataSource]="dataSource" matSort>
-    
-                <ng-container matColumnDef="names">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Nombres y apellidos </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="text-center"> {{row.NomColaborador}} {{row.ApeColaborador}}</mat-cell>
+                
+
+                <ng-container matColumnDef="Id">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-light"> # </mat-header-cell>
+                    <mat-cell *matCellDef="let row; let i = index"> {{ i + 1}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Names">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-light"> Nombres y apellidos </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.NomColaborador}} {{row.ApeColaborador}} </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="Correo">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Correo </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="text-center"> {{row.CorreoColaborador}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-light"> Correo </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.CorreoColaborador}} </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="usuario">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Usuario </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="text-center"> {{row.Usuario}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-light"> Usuario </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.Usuario}} </mat-cell>
                 </ng-container>
     
                 <ng-container matColumnDef="Documento">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Documento </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="text-center"> {{row.TipDocColaborador}} - {{row.DocumentoColaborador}} </mat-cell>
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-light"> Documento </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.TipDocColaborador}} - {{row.DocumentoColaborador}} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="Cargo">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-light"> Cargo </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> {{row.NomRol}} </mat-cell>
                 </ng-container>
     
-                <ng-container matColumnDef="Editar">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-dark"> Editar </mat-header-cell>
-                    <mat-cell *matCellDef="let row" class="text-center"> <a [routerLink]="['../editar', row.IdUsuario]" routerLinkActive="router-link-active" (click)="saveUserStorage(row.IdUsuario)" class="btn btn-sm bg-success text-dark"><i class="fas fa-edit fz-20"></i></a> </mat-cell>
-                </ng-container>
-    
+                <ng-container matColumnDef="Opciones">
+                    <mat-header-cell *matHeaderCellDef mat-sort-header class="fz-15 text-light"> Opciones </mat-header-cell>
+                    <mat-cell *matCellDef="let row"> 
+                        <a [routerLink]="['../editar', row.IdUsuario]" routerLinkActive="router-link-active" (click)="saveUserStorage(row.IdUsuario)" class="btn btn-sm bg-success text-dark"><i class="fas fa-edit fz-20"></i></a> 
+                        <button (click)="deleteUser(row.IdUsuario, row.Usuario)" class="btn btn-sm bg-danger text-dark ml-4"><i class="fas fa-trash-alt fz-20"></i></button>
+                    </mat-cell>
+                </ng-container>    
                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
             </mat-table>
