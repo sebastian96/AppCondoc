@@ -7,7 +7,7 @@ import { log } from 'util';
 })
 export class Apiservice {
 
-    public backUrl = 'http://localhost/appCondoc/backApp/api/ctrlGeneral.php/';
+    public backUrl = 'https://booksandbooksdigital.com.co/backApp/api/ctrlGeneral.php/';
 
     constructor(private http: HttpClient) {}
 
