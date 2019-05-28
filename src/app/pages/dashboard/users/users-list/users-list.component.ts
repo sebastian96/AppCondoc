@@ -73,7 +73,6 @@ export class UsersListComponent {
             if (result.value) {
                 this.api.deleteUser('deleteUser', DATA).subscribe(
                     (response) => {
-                        console.log(response);
                         if (response.estado === 'success') {
                             Swal.fire(
                                 'Eliminado!',
