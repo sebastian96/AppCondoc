@@ -62,7 +62,7 @@
                                     *ngIf="form.controls['correo'].errors?.pattern || form.controls['correo'].errors?.email">
                                     <strong class="text-danger fz-bold">* Ingrese un correo valido</strong>
                                 </div>
-                                <div *ngIf="form.controls['correo'].errors?.existe">
+                                <div *ngIf="userExist['email']">
                                     <strong class="text-danger fz-bold">* Este correo ya esta en uso</strong>
                                 </div>
                             </div>
@@ -77,7 +77,7 @@
                                         <strong class="text-danger fz-bold">* Este campo es requerido</strong>
                                     </div>
                                 </div>
-                                <div *ngIf="form.controls['usuario'].errors?.existe">
+                                <div *ngIf="userExist['user']">
                                     <strong class="text-danger fz-bold">* Este usuario ya esta en uso</strong>
                                 </div>
                             </div>
@@ -130,7 +130,7 @@
                                 <div *ngIf="form.controls['documento'].errors?.pattern">
                                     <strong class="text-danger fz-bold">* Ingrese una identificacion valida</strong>
                                 </div>
-                                <div *ngIf="form.controls['documento'].errors?.existe">
+                                <div *ngIf="userExist['document']">
                                     <strong class="text-danger fz-bold">* La cedula ya esta registrada</strong>
                                 </div>
                             </div>

@@ -18,9 +18,16 @@ export class UserCreateComponent implements OnInit, OnDestroy {
     usersUsed: Array<any> = [];
     body: HTMLCollectionOf<HTMLBodyElement> = document.getElementsByTagName('body');
     rol: object = [];
-
+    userExist: object = {
+        email: false,
+        user: false,
+        document: false
+    };
+    
+    
     constructor( public Api: Apiservice, private router: Router, private fb: FormBuilder) {
         this.body[0].style.overflowY = 'scroll';
+
         this.Api.listRol('getRol').subscribe(
             (response) => {
                 this.rol = response;
@@ -29,6 +36,7 @@ export class UserCreateComponent implements OnInit, OnDestroy {
                 console.log(error);
             }
         );
+
         this.Api.listUsers('getUsers').subscribe(
             (Response: Array<any>) => {
                 this.usersUsed = Response;
@@ -57,11 +65,10 @@ export class UserCreateComponent implements OnInit, OnDestroy {
             Validators.required,
             this.different.bind(this.form)
         ]);
-
     }
 
     register() {
-        if (this.form.valid) {
+        if (this.form.valid && !this.userExist['email'] && !this.userExist['user'] && !this.userExist['document']) {
             const datosUsuario: object = {
                 nombres: this.form.controls.nombres.value,
                 apellidos: this.form.controls.apellidos.value,
@@ -131,19 +138,27 @@ export class UserCreateComponent implements OnInit, OnDestroy {
         return null;
     }
 
-    existUser( control: AbstractControl ): Promise<any> | Observable<any> {
-
+    existUser( control: AbstractControl): Promise<any> | Observable<any> {
+        
         const PROMISE = new Promise(
             ( resolve, reject ) => {
-                this.usersUsed.map(value => {
-                    if (control.value === value.Usuario) {
-                        resolve({ existe: true });
-                    } else {
-                        resolve(null);
+                control.valueChanges.subscribe(
+                    (value) => {
+                        this.usersUsed.forEach(element => {
+                            if (value === element.CorreoColaborador) {
+                                this.userExist['email'] = true;
+                            } else if (value === element.Usuario) {
+                                this.userExist['user'] = true;
+                            } else if (value === element.DocumentoColaborador) {
+                                this.userExist['document'] = true;
+                            }
+                            resolve(null);
+                        });
                     }
-                });
+                );
             }
         );
+
         return PROMISE;
     }
 
